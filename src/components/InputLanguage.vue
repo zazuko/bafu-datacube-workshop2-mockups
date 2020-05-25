@@ -1,5 +1,5 @@
 <template>
-  <b-select :value="value">
+  <b-select :value="value" v-bind="$attrs">
     <option v-for="language in languages" :key="language.uri" :value="language.uri">
       {{ language.label }}
     </option>

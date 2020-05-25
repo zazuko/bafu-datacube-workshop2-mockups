@@ -7,11 +7,7 @@
             <div class="cell-content">
               <ButtonEdit title="Edit cube metadata" @click="editCube(cube)" />
               {{ cube.label }}
-              <b-select v-model="selectedLanguage">
-                <option v-for="language in languages" :key="language.code" :value="language.code">
-                  {{ language.label }}
-                </option>
-              </b-select>
+              <InputLanguage v-model="selectedLanguage" size="is-small" />
             </div>
           </th>
         </tr>
@@ -102,6 +98,7 @@ import SidePane from '@/components/SidePane.vue'
 import DesignerCubeForm from '@/components/DesignerCubeForm.vue'
 import DesignerDimensionForm from '@/components/DesignerDimensionForm.vue'
 import DesignerValueForm from '@/components/DesignerValueForm.vue'
+import InputLanguage from '@/components/InputLanguage.vue'
 
 export default {
   name: 'Designer',
@@ -110,7 +107,8 @@ export default {
     SidePane,
     DesignerCubeForm,
     DesignerDimensionForm,
-    DesignerValueForm
+    DesignerValueForm,
+    InputLanguage
   },
 
   data () {

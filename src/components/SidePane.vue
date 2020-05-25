@@ -1,16 +1,22 @@
 <template>
   <div class="quickview" :class="{ 'is-active': isOpen }">
     <header class="quickview-header">
-      <h2 class="title">{{ title }}</h2>
+      <h2>{{ title }}</h2>
       <button class="delete" @click="$emit('close')"></button>
     </header>
 
     <div class="quickview-body">
       <slot />
     </div>
-    <footer class="quickview-footer"></footer>
+    <!-- <footer class="quickview-footer"></footer> -->
   </div>
 </template>
+
+<style scoped>
+  .quickview-body {
+    padding: 1rem;
+  }
+</style>
 
 <script>
 import Quickview from 'bulma-quickview/dist/js/bulma-quickview'

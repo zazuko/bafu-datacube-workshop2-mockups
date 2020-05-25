@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import Mapper from '../views/Mapper.vue'
+import Designer from '../views/Designer.vue'
 
 Vue.use(VueRouter)
 
@@ -9,6 +11,16 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/mapper',
+    name: 'Mapper',
+    component: Mapper
+  },
+  {
+    path: '/designer',
+    name: 'Designer',
+    component: Designer
   }
 ]
 

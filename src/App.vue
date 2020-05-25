@@ -1,5 +1,15 @@
 <template>
   <div id="app">
+    <b-navbar>
+      <template slot="start">
+        <b-navbar-item tag="router-link" :to="{ name: 'Mapper' }">
+          Mapper
+        </b-navbar-item>
+        <b-navbar-item tag="router-link" :to="{ name: 'Designer' }">
+          Designer
+        </b-navbar-item>
+      </template>
+    </b-navbar>
     <router-view/>
   </div>
 </template>

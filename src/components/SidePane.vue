@@ -1,14 +1,12 @@
 <template>
   <div class="quickview" :class="{ 'is-active': isOpen }">
     <header class="quickview-header">
-      <p class="title">Side pane title</p>
+      <h2 class="title">{{ title }}</h2>
       <button class="delete" @click="$emit('close')"></button>
     </header>
 
     <div class="quickview-body">
-      <div class="quickview-block">
-        ...
-      </div>
+      <slot />
     </div>
     <footer class="quickview-footer"></footer>
   </div>
@@ -20,7 +18,7 @@ import 'bulma-quickview/dist/css/bulma-quickview.min.css'
 
 export default {
   name: 'SidePane',
-  props: ['isOpen'],
+  props: ['isOpen', 'title'],
 
   data () {
     return {

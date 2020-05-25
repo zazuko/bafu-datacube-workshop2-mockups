@@ -2,6 +2,7 @@
   <div class="Mapper">
     <div class="mapping columns">
       <div class="column">
+        <h2 class="title is-6">Input sources</h2>
         <div v-for="source in sources" :key="source.uri" class="source panel">
           <p class="panel-heading">{{ source.label }}</p>
           <p class="panel-tabs">
@@ -14,8 +15,11 @@
           </div>
         </div>
       </div>
-      <div class="column is-1"></div>
+      <div class="column is-1">
+        <p class="has-text-centered"><b-icon icon="arrow-right" size="is-small" /></p>
+      </div>
       <div class="column">
+        <h2 class="title is-6">Output tables</h2>
         <div v-for="table in tables" :key="table.uri" class="table panel">
           <p class="panel-heading" :style="{ 'background-color': table.color }">{{ table.label }}</p>
           <div v-for="attribute in table.attributes" :key="attribute.uri" class="panel-block">

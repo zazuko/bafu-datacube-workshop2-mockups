@@ -16,7 +16,7 @@
           </th>
         </tr>
         <tr>
-          <th v-for="column in columns" :key="column.uri" :class="'type-' + column.scaleOfMeasure" align>
+          <th v-for="column in columns" :key="column.uri" :class="'scale-' + column.scaleOfMeasure" align>
             <div class="cell-content">
               <ButtonEdit @click="editDimension(column)" title="Edit dimension" />
               {{ column.label }}
@@ -26,7 +26,7 @@
       </thead>
       <tbody>
         <tr v-for="(row, index) in data" :key="index">
-          <td v-for="column in columns" :key="column.uri" :class="'type-' + column.scaleOfMeasure">
+          <td v-for="column in columns" :key="column.uri" :class="'scale-' + column.scaleOfMeasure">
             <div class="cell-content">
               <ButtonEdit @click="editValue(row, column.uri)" title="Edit value" />
               <span class="value">
@@ -68,29 +68,29 @@ tr > th {
   padding: 0.2rem;
 }
 
-.type-concept .cell-content {
+.scale-concept .cell-content {
   justify-content: flex-start;
 }
 
-.type-concept .value {
+.scale-concept .value {
   border: 1px solid rgb(55, 55, 150);
   border-radius: 15px;
   padding: 0 5px;
 }
 
-.type-continuous .unit {
+.scale-continuous .unit {
   margin-right: 0.2rem;
 }
 
-.type-continuous .value {
+.scale-continuous .value {
   font-variant-numeric: lining-nums tabular-nums;
 }
 
-.type-time .value {
+.scale-temporal .value {
   font-variant-numeric: lining-nums tabular-nums;
 }
 
-.type-time .value {
+.scale-temporal .value {
   text-decoration: underline;
   text-decoration-color: orange;
 }
@@ -121,7 +121,7 @@ export default {
       },
       columns: [
         { type: 'dimension', label: 'Station', uri: 'station', scaleOfMeasure: 'concept' },
-        { type: 'dimension', label: 'Year', uri: 'year', scaleOfMeasure: 'time' },
+        { type: 'dimension', label: 'Year', uri: 'year', scaleOfMeasure: 'temporal' },
         { type: 'dimension', label: 'Measurement', uri: 'measurement', scaleOfMeasure: 'continuous' },
       ],
       data: [

@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
 import Mapper from '../views/Mapper.vue'
 import Designer from '../views/Designer.vue'
 
@@ -10,7 +9,7 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    redirect: { name: 'Designer' }
   },
   {
     path: '/mapper',

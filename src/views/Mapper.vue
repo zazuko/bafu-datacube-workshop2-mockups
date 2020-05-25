@@ -43,9 +43,7 @@
         </b-button>
       </header>
       <div class="cube-preview-content">
-        <div class="section">
-          <p class="has-text-centered has-text-grey">Table will go here</p>
-        </div>
+        <CubeDesigner />
       </div>
     </div>
   </div>
@@ -78,8 +76,11 @@
 </style>
 
 <script>
+import CubeDesigner from '@/components/CubeDesigner.vue'
+
 export default {
   name: 'Mapper',
+  components: { CubeDesigner },
 
   data () {
     return {

@@ -23,6 +23,12 @@
         </option>
       </b-select>
     </b-field>
+
+    <b-field label="Special actions" v-if="value.scaleOfMeasure === 'concept'">
+      <b-button icon-left="link" type="is-info">
+        Map to managed dimension
+      </b-button>
+    </b-field>
   </form>
 </template>
 

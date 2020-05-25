@@ -1,9 +1,9 @@
 <template>
   <form class="form">
     <b-field label="Label" :addons="false">
-      <b-field>
-        <b-input v-model="value.label" class="is-expanded" />
-        <InputLanguage />
+      <b-field v-for="(label, index) in value.label" :key="index">
+        <b-input v-model="label.value" class="is-expanded" />
+        <InputLanguage v-model="label.language" />
       </b-field>
       <b-button icon-left="plus" title="Add a value" type="is-white" />
     </b-field>

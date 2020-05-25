@@ -6,7 +6,8 @@
           <th :colspan="columns.length">
             <div class="cell-content">
               <ButtonEdit title="Edit cube metadata" @click="editCube(cube)" />
-              {{ cube.label }}
+              <span v-if="getLabel(cube)">{{ getLabel(cube) }}</span>
+              <span v-else class="has-text-grey">Untitled Cube</span>
               <InputLanguage v-model="selectedLanguage" size="is-small" />
             </div>
           </th>
@@ -15,7 +16,8 @@
           <th v-for="column in columns" :key="column.uri" :class="'scale-' + column.scaleOfMeasure" align>
             <div class="cell-content">
               <ButtonEdit @click="editDimension(column)" title="Edit dimension" />
-              {{ column.label }}
+              <span v-if="getLabel(column)">{{ getLabel(column) }}</span>
+              <span v-else class="has-text-grey">Missing label</span>
             </div>
           </th>
         </tr>
@@ -126,12 +128,27 @@ export default {
     return {
       cube: {
         type: 'cube',
-        label: 'Quality of air in Switzerland'
+        label: [{ value: 'Quality of air in Switzerland', language: 'en' }]
       },
       columns: [
-        { type: 'dimension', label: 'Station', uri: 'station', scaleOfMeasure: 'concept' },
-        { type: 'dimension', label: 'Year', uri: 'year', scaleOfMeasure: 'temporal' },
-        { type: 'dimension', label: 'Measurement', uri: 'measurement', scaleOfMeasure: 'continuous' },
+        {
+          type: 'dimension',
+          label: [{ value: 'Station', language: 'en' }],
+          uri: 'station',
+          scaleOfMeasure: 'concept'
+        },
+        {
+          type: 'dimension',
+          label: [{ value: 'Year', language: 'en' }],
+          uri: 'year',
+          scaleOfMeasure: 'temporal'
+        },
+        {
+          type: 'dimension',
+          label: [{ value: 'Measurement', language: 'en' }],
+          uri: 'measurement',
+          scaleOfMeasure: 'continuous'
+        },
       ],
       data: [
         {
@@ -180,6 +197,11 @@ export default {
 
     getValue (row, column) {
       return row[column.uri]
+    },
+
+    getLabel (resource) {
+      const label = resource.label.find(({ language }) => language === this.selectedLanguage)
+      return label ? label.value : ''
     }
   },
 

@@ -24,12 +24,22 @@
         <tr v-for="(row, index) in data" :key="index">
           <td v-for="column in columns" :key="column.uri" :class="'scale-' + column.scaleOfMeasure">
             <div class="cell-content">
-              <ButtonEdit @click="editValue(row, column.uri)" title="Edit value" />
-              <span class="value">
+              <b-button
+                v-if="column.scaleOfMeasure === 'concept'"
+                @click="editValue(row, column.uri)"
+                title="Edit entity"
+                :rounded="true"
+                size="is-small"
+                icon-left="pen"
+                type="is-info"
+              >
+                {{ getValue(row, column).value }}
+              </b-button>
+              <span v-else class="value">
+                {{ getValue(row, column).value }}
                 <small v-if="getValue(row, column).unit" class="unit has-text-grey">
                   {{ getValue(row, column).unit }}
                 </small>
-                {{ getValue(row, column).value }}
               </span>
             </div>
           </td>
@@ -58,20 +68,21 @@ tr > th {
 
 .cell-content {
   display: flex;
-  justify-content: space-between;
   align-items: center;
 
   padding: 0.2rem;
 }
 
-.scale-concept .cell-content {
-  justify-content: flex-start;
+thead .cell-content {
+  justify-content: space-between;
 }
 
-.scale-concept .value {
-  border: 1px solid rgb(55, 55, 150);
-  border-radius: 15px;
-  padding: 0 5px;
+tbody .cell-content {
+  justify-content: flex-end;
+}
+
+.scale-concept .cell-content {
+  justify-content: flex-start;
 }
 
 .scale-continuous .unit {

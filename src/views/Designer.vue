@@ -42,7 +42,10 @@
     </table>
 
     <SidePane :isOpen="showSidePane" :title="sidePanelTitle" @close="onCloseSidePane">
-      Hello
+      <DesignerCubeForm v-if="edited && edited.type === 'cube'" :value="edited" />
+      <DesignerDimensionForm v-else-if="edited && edited.type === 'dimension'" :value="edited" />
+      <DesignerValueForm v-else-if="edited && edited.type === 'value'" :value="edited" />
+      <p v-else>Unsupported type</p>
     </SidePane>
   </div>
 </template>
@@ -96,10 +99,19 @@ tr > th {
 <script>
 import ButtonEdit from '@/components/ButtonEdit.vue'
 import SidePane from '@/components/SidePane.vue'
+import DesignerCubeForm from '@/components/DesignerCubeForm.vue'
+import DesignerDimensionForm from '@/components/DesignerDimensionForm.vue'
+import DesignerValueForm from '@/components/DesignerValueForm.vue'
 
 export default {
   name: 'Designer',
-  components: { ButtonEdit, SidePane },
+  components: {
+    ButtonEdit,
+    SidePane,
+    DesignerCubeForm,
+    DesignerDimensionForm,
+    DesignerValueForm
+  },
 
   data () {
     return {

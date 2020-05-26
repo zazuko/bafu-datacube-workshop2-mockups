@@ -49,6 +49,7 @@ export default {
       {
         type: 'dimension',
         label: [{ value: 'Station', language: 'en' }],
+        description: [],
         uri: 'station',
         scaleOfMeasure: 'concept',
         color: 'rgb(165, 214, 167)',
@@ -56,6 +57,7 @@ export default {
       {
         type: 'dimension',
         label: [{ value: 'Pollutant', language: 'en' }],
+        description: [],
         uri: 'pollutant',
         scaleOfMeasure: 'concept',
         color: 'rgb(239, 154, 154)',
@@ -64,13 +66,14 @@ export default {
       {
         type: 'dimension',
         label: [{ value: 'Year', language: 'en' }],
+        description: [],
         uri: 'year',
         scaleOfMeasure: 'temporal'
       },
       {
         type: 'dimension',
         label: [{ value: 'Measurement', language: 'en' }],
-        description: [{ value: 'Measures things', language: 'en' }],
+        description: [{ value: 'Measures things', language: 'en' }, { value: 'Mesure des trucs', language: 'fr' }],
         uri: 'measurement',
         scaleOfMeasure: 'continuous',
       },

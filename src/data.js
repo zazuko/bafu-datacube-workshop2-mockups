@@ -14,9 +14,28 @@ export default {
 
   tables: [
     {
-      uri: 'station',
-      label: 'Station',
+      uri: 'Measurement',
+      label: 'Measurement',
       color: 'rgb(165, 214, 167)',
+      attributes: [
+        { uri: 'year', label: 'Year' },
+        { uri: 'measurement', label: 'Measurement' },
+        { uri: 'station', label: 'Station' },
+        { uri: 'pollutant', label: 'Pollutant' },
+      ]
+    },
+    {
+      uri: 'Station',
+      label: 'Station',
+      color: 'rgb(129, 212, 250)',
+      attributes: [
+        { uri: 'id', label: 'ID' },
+      ]
+    },
+    {
+      uri: 'Pollutant',
+      label: 'Pollutant',
+      color: 'rgb(239, 154, 154)',
       attributes: [
         { uri: 'id', label: 'ID' },
       ]
@@ -31,7 +50,15 @@ export default {
         type: 'dimension',
         label: [{ value: 'Station', language: 'en' }],
         uri: 'station',
-        scaleOfMeasure: 'concept'
+        scaleOfMeasure: 'concept',
+        color: 'rgb(165, 214, 167)',
+      },
+      {
+        type: 'dimension',
+        label: [{ value: 'Pollutant', language: 'en' }],
+        uri: 'pollutant',
+        scaleOfMeasure: 'concept',
+        color: 'rgb(239, 154, 154)',
       },
       {
         type: 'dimension',
@@ -49,19 +76,40 @@ export default {
     data: [
       {
         station: { value: 'Basel' },
+        pollutant: { value: 'Stickstoffdioxid' },
         year: { value: '2001' },
         measurement: { value: '12.1', unit: 'µg/m³' },
       },
       {
         station: { value: 'Basel' },
+        pollutant: { value: 'Stickstoffdioxid' },
         year: { value: '2002' },
         measurement: { value: '24.2', unit: 'µg/m³' },
       },
       {
         station: { value: 'Basel' },
+        pollutant: { value: 'Stickstoffdioxid' },
         year: { value: '2003' },
         measurement: { value: '5.1', unit: 'µg/m³' },
-      }
+      },
+      {
+        station: { value: 'Aarau' },
+        pollutant: { value: 'Stickstoffdioxid' },
+        year: { value: '2001' },
+        measurement: { value: '3.1', unit: 'µg/m³' },
+      },
+      {
+        station: { value: 'Aarau' },
+        pollutant: { value: 'Stickstoffdioxid' },
+        year: { value: '2002' },
+        measurement: { value: '15.1', unit: 'µg/m³' },
+      },
+      {
+        station: { value: 'Aarau' },
+        pollutant: { value: 'Stickstoffdioxid' },
+        year: { value: '2003' },
+        measurement: { value: '45.1', unit: 'µg/m³' },
+      },
     ],
   },
 

@@ -33,7 +33,7 @@
                 :rounded="true"
                 size="is-small"
                 icon-left="pen"
-                type="is-info"
+                :style="{ 'background-color': dimension.color}"
               >
                 {{ getValue(row, dimension).value }}
               </b-button>

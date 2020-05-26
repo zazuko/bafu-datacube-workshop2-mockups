@@ -58,6 +58,7 @@
   position: absolute;
   bottom: 0;
   width: 100%;
+  background-color: white;
 }
 
 .cube-preview-header {
@@ -70,8 +71,13 @@
   border-radius: 0;
 }
 
+.cube-preview-content {
+  height: 50vh;
+  overflow-y: auto;
+}
+
 .is-collapsed .cube-preview-content {
-  display: none;
+  height: 0;
 }
 </style>
 

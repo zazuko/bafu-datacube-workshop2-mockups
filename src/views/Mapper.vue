@@ -127,7 +127,7 @@
 <style scoped>
 .mapping {
   padding: 0 1rem;
-  max-width: 110rem;
+  max-width: 100rem;
 }
 
 .source-mapping:not(:last-child) {

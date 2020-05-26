@@ -55,7 +55,7 @@
               </b-checkbox>
               <div class="column-mapped-attributes">
                 <b-tooltip
-                  v-for="attribute in getMappedAttributes(column)"
+                  v-for="attribute in getMappedAttributes(source, column)"
                   :key="attribute.uri"
                   class="column-mapped-attribute"
                   :style="{ 'background-color': attribute.table.color }"
@@ -217,12 +217,12 @@ export default {
       return this.tables.filter((table) => table.source === source.uri)
     },
 
-    getMappedAttributes (column) {
+    getMappedAttributes (source, column) {
       return this.tables.reduce((acc, table) => {
         return acc.concat(table.attributes
           .map((attribute) => ({ ...attribute, table }))
           .filter((attribute) => {
-            return attribute.column === column.uri
+            return table.source === source.uri && attribute.column === column.uri
           }))
       }, [])
     }

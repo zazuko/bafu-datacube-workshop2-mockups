@@ -26,11 +26,11 @@ export default {
       uri: 'pollutants.csv',
       label: 'pollutants.csv',
       columns: [
-        { uri: 'xpollutant_id', data: ['NO2', 'OX4'] },
-        { uri: 'xpollutant_name_de', data: ['Stickstoffdioxid'] },
-        { uri: 'xpollutant_name_en', data: ['Stickstoffdioxid'] },
-        { uri: 'xpollutant_description_de', data: [] },
-        { uri: 'xpollutant_description_en', data: [] },
+        { uri: 'id', data: ['NO2', 'OX4'] },
+        { uri: 'pollutant_name_de', data: ['Stickstoffdioxid'] },
+        { uri: 'pollutant_name_en', data: ['Stickstoffdioxid'] },
+        { uri: 'pollutant_description_de', data: [] },
+        { uri: 'pollutant_description_en', data: [] },
       ],
     },
   ],
@@ -64,7 +64,7 @@ export default {
       label: 'Pollutant',
       color: 'rgb(239, 154, 154)',
       attributes: [
-        { uri: 'id', label: 'ID', column: 'xpollutant_id' },
+        { uri: 'id', label: 'ID', column: 'id' },
       ]
     },
   ],

@@ -53,6 +53,18 @@
                   ({{ column.data.join(', ') }})
                 </span>
               </b-checkbox>
+              <div class="column-mapped-attributes">
+                <b-tooltip
+                  v-for="attribute in getMappedAttributes(column)"
+                  :key="attribute.uri"
+                  class="column-mapped-attribute"
+                  :style="{ 'background-color': attribute.table.color }"
+                  :label="attribute.table.label + ' -> ' + attribute.label"
+                  type="is-light"
+                  :delay="200"
+                  size="is-small"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -161,6 +173,17 @@
 .actions > *:not(:last-child) {
   margin-right: 0.2rem;
 }
+
+.column-mapped-attribute {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.column-mapped-attribute:not(:last-child) {
+  margin-right: 0.1rem;
+}
 </style>
 
 <script>
@@ -192,6 +215,16 @@ export default {
 
     getSourceTables (source) {
       return this.tables.filter((table) => table.source === source.uri)
+    },
+
+    getMappedAttributes (column) {
+      return this.tables.reduce((acc, table) => {
+        return acc.concat(table.attributes
+          .map((attribute) => ({ ...attribute, table }))
+          .filter((attribute) => {
+            return attribute.column === column.uri
+          }))
+      }, [])
     }
   }
 }

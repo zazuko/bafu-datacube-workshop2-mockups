@@ -26,11 +26,11 @@ export default {
       uri: 'pollutants.csv',
       label: 'pollutants.csv',
       columns: [
-        { uri: 'pollutant_id', data: ['NO2', 'OX4'] },
-        { uri: 'pollutant_name_de', data: ['Stickstoffdioxid'] },
-        { uri: 'pollutant_name_en', data: ['Stickstoffdioxid'] },
-        { uri: 'pollutant_description_de', data: [] },
-        { uri: 'pollutant_description_en', data: [] },
+        { uri: 'xpollutant_id', data: ['NO2', 'OX4'] },
+        { uri: 'xpollutant_name_de', data: ['Stickstoffdioxid'] },
+        { uri: 'xpollutant_name_en', data: ['Stickstoffdioxid'] },
+        { uri: 'xpollutant_description_de', data: [] },
+        { uri: 'xpollutant_description_en', data: [] },
       ],
     },
   ],
@@ -42,11 +42,11 @@ export default {
       label: 'Measurement',
       color: 'rgb(165, 214, 167)',
       attributes: [
-        { uri: 'year', label: 'Year' },
-        { uri: 'measurement', label: 'Measurement' },
-        { uri: 'value_remark', label: 'Remark' },
-        { uri: 'station', label: 'Station' },
-        { uri: 'pollutant', label: 'Pollutant' },
+        { uri: 'year', label: 'Year', column: 'year' },
+        { uri: 'measurement', label: 'Measurement', column: 'value' },
+        { uri: 'value_remark', label: 'Remark', column: 'value_remark' },
+        { uri: 'station', label: 'Station', column: 'station_id' },
+        { uri: 'pollutant', label: 'Pollutant', column: 'pollutant_id' },
       ]
     },
     {
@@ -55,7 +55,7 @@ export default {
       label: 'Station',
       color: 'rgb(129, 212, 250)',
       attributes: [
-        { uri: 'id', label: 'ID' },
+        { uri: 'id', label: 'ID', column: 'station_id' },
       ]
     },
     {
@@ -64,7 +64,7 @@ export default {
       label: 'Pollutant',
       color: 'rgb(239, 154, 154)',
       attributes: [
-        { uri: 'id', label: 'ID' },
+        { uri: 'id', label: 'ID', column: 'xpollutant_id' },
       ]
     },
   ],

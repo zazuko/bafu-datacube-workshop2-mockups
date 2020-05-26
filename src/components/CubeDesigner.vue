@@ -2,7 +2,7 @@
   <div class="CubeDesigner">
     <table class="table is-condensed is-bordered">
       <thead>
-        <tr>
+        <tr class="cube-row">
           <th :colspan="cube.dimensions.length">
             <div class="cell-content">
               <ButtonEdit title="Edit cube metadata" @click="editCube(cube)" />
@@ -12,12 +12,26 @@
             </div>
           </th>
         </tr>
-        <tr>
+        <tr class="dimensions-row">
           <th v-for="dimension in cube.dimensions" :key="dimension.uri" :class="'scale-' + dimension.scaleOfMeasure" align>
             <div class="cell-content">
-              <ButtonEdit @click="editDimension(dimension)" title="Edit dimension" />
               <span v-if="getLabel(dimension)">{{ getLabel(dimension) }}</span>
               <span v-else class="has-text-grey">Missing label</span>
+              <div class="dimension-infos">
+                <b-tooltip v-if="getDescription(dimension)" :label="getDescription(dimension)" type="is-light" :delay="200" size="is-small">
+                  <b-icon icon="comment-alt" pack="far" />
+                </b-tooltip>
+                <b-tooltip v-if="dimension.isManaged" label="Linked to managed dimension" type="is-light" :delay="200" size="is-small">
+                  <b-icon icon="external-link-square-alt" />
+                </b-tooltip>
+              </div>
+            </div>
+            <div class="dimension-actions">
+              <ButtonEdit @click="editDimension(dimension)" title="Edit dimension" />
+              <b-tooltip label="Filter dimension" type="is-light" :delay="200" size="is-small">
+                <b-button type="is-white" class="has-text-grey" size="is-small" icon-left="filter">
+                </b-button>
+              </b-tooltip>
             </div>
           </th>
         </tr>
@@ -75,8 +89,16 @@ tr > th {
   padding: 0.2rem;
 }
 
-thead .cell-content {
+.cube-row th {
+  padding: 0.3rem 0;
+}
+
+.cube-row .cell-content {
   justify-content: space-between;
+}
+
+.dimensions-row .cell-content {
+  justify-content: flex-start;
 }
 
 tbody .cell-content {
@@ -102,6 +124,22 @@ tbody .cell-content {
 .scale-temporal .value {
   text-decoration: underline;
   text-decoration-color: orange;
+}
+
+.dimension-infos {
+  display: flex;
+  /* justify-content: flex-end; */
+}
+
+.dimension-infos .icon {
+  height: 1rem;
+  width: 1rem;
+  font-size: 0.5rem;
+}
+
+.dimension-actions {
+  display: flex;
+  justify-content: flex-start;
 }
 </style>
 
@@ -156,7 +194,12 @@ export default {
     getLabel (resource) {
       const label = resource.label.find(({ language }) => language === this.selectedLanguage)
       return label ? label.value : ''
-    }
+    },
+
+    getDescription (resource) {
+      const description = (resource.description || []).find(({ language }) => language === this.selectedLanguage)
+      return description ? description.value : ''
+    },
   },
 
   computed: {

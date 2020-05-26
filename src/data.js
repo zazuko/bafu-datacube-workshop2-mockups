@@ -59,6 +59,7 @@ export default {
         uri: 'pollutant',
         scaleOfMeasure: 'concept',
         color: 'rgb(239, 154, 154)',
+        isManaged: true,
       },
       {
         type: 'dimension',
@@ -69,8 +70,9 @@ export default {
       {
         type: 'dimension',
         label: [{ value: 'Measurement', language: 'en' }],
+        description: [{ value: 'Measures things', language: 'en' }],
         uri: 'measurement',
-        scaleOfMeasure: 'continuous'
+        scaleOfMeasure: 'continuous',
       },
     ],
     data: [

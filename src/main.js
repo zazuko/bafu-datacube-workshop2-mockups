@@ -5,11 +5,13 @@ import Buefy from 'buefy'
 import 'buefy/dist/buefy.css'
 import { library as iconsLibrary } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
+import { far } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 Vue.config.productionTip = false
 
 iconsLibrary.add(fas)
+iconsLibrary.add(far)
 Vue.component('FontAwesomeIcon', FontAwesomeIcon)
 
 Vue.use(Buefy, {

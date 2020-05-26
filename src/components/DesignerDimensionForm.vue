@@ -17,11 +17,7 @@
     </b-field>
 
     <b-field label="Scale of measure" :addons="false">
-      <b-select v-model="value.scaleOfMeasure">
-        <option v-for="scale in scales" :key="scale.uri" :value="scale.uri">
-          {{ scale.label }}
-        </option>
-      </b-select>
+      <InputScaleOfMeasure v-model="value.scaleOfMeasure" />
     </b-field>
 
     <b-field label="Special actions" v-if="value.scaleOfMeasure === 'concept'">
@@ -34,20 +30,11 @@
 
 <script>
 import InputLanguage from './InputLanguage.vue'
+import InputScaleOfMeasure from './InputScaleOfMeasure.vue'
 
 export default {
   name: 'DesignerDimensionForm',
-  components: { InputLanguage },
+  components: { InputLanguage, InputScaleOfMeasure },
   props: ['value'],
-
-  data () {
-    return {
-      scales: [
-        { uri: 'continuous', label: 'Continuous' },
-        { uri: 'concept', label: 'Concept' },
-        { uri: 'temporal', label: 'Temporal' }
-      ]
-    }
-  }
 }
 </script>

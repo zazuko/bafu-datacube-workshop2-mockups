@@ -119,4 +119,10 @@ export default {
     { label: 'de', code: 'de' },
     { label: 'it', code: 'it' },
   ],
+
+  scaleOfMeasures: [
+    { uri: 'continuous', label: 'Continuous', icon: 'ruler-horizontal' },
+    { uri: 'concept', label: 'Concept', icon: 'list' },
+    { uri: 'temporal', label: 'Temporal', icon: 'clock' }
+  ]
 }

@@ -43,7 +43,7 @@
         </b-button>
       </header>
       <div class="cube-preview-content">
-        <CubeDesigner />
+        <CubeDesigner :cube="cube" />
       </div>
     </div>
   </div>
@@ -77,6 +77,7 @@
 
 <script>
 import CubeDesigner from '@/components/CubeDesigner.vue'
+import data from '@/data'
 
 export default {
   name: 'Mapper',
@@ -84,29 +85,10 @@ export default {
 
   data () {
     return {
-      sources: [
-        {
-          uri: 'stations.csv',
-          label: 'stations.csv',
-          columns: ['station_id', 'pollutant_id'],
-        },
-        {
-          uri: 'pollutants.csv',
-          label: 'pollutants.csv',
-          columns: ['pollutant_id', 'pollutant_name_de', 'pollutant_name_en'],
-        },
-      ],
-      tables: [
-        {
-          uri: 'station',
-          label: 'Station',
-          color: 'rgb(165, 214, 167)',
-          attributes: [
-            { uri: 'id', label: 'ID' },
-          ]
-        },
-      ],
-      showPreview: false
+      sources: data.sources,
+      tables: data.tables,
+      cube: data.cube,
+      showPreview: false,
     }
   },
 

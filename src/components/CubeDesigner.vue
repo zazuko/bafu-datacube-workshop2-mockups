@@ -3,7 +3,7 @@
     <table class="table is-condensed is-bordered">
       <thead>
         <tr>
-          <th :colspan="columns.length">
+          <th :colspan="cube.dimensions.length">
             <div class="cell-content">
               <ButtonEdit title="Edit cube metadata" @click="editCube(cube)" />
               <span v-if="getLabel(cube)">{{ getLabel(cube) }}</span>
@@ -13,34 +13,34 @@
           </th>
         </tr>
         <tr>
-          <th v-for="column in columns" :key="column.uri" :class="'scale-' + column.scaleOfMeasure" align>
+          <th v-for="dimension in cube.dimensions" :key="dimension.uri" :class="'scale-' + dimension.scaleOfMeasure" align>
             <div class="cell-content">
-              <ButtonEdit @click="editDimension(column)" title="Edit dimension" />
-              <span v-if="getLabel(column)">{{ getLabel(column) }}</span>
+              <ButtonEdit @click="editDimension(dimension)" title="Edit dimension" />
+              <span v-if="getLabel(dimension)">{{ getLabel(dimension) }}</span>
               <span v-else class="has-text-grey">Missing label</span>
             </div>
           </th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(row, index) in data" :key="index">
-          <td v-for="column in columns" :key="column.uri" :class="'scale-' + column.scaleOfMeasure">
+        <tr v-for="(row, index) in cube.data" :key="index">
+          <td v-for="dimension in cube.dimensions" :key="dimension.uri" :class="'scale-' + dimension.scaleOfMeasure">
             <div class="cell-content">
               <b-button
-                v-if="column.scaleOfMeasure === 'concept'"
-                @click="editValue(row, column.uri)"
+                v-if="dimension.scaleOfMeasure === 'concept'"
+                @click="editValue(row, dimension.uri)"
                 title="Edit entity"
                 :rounded="true"
                 size="is-small"
                 icon-left="pen"
                 type="is-info"
               >
-                {{ getValue(row, column).value }}
+                {{ getValue(row, dimension).value }}
               </b-button>
               <span v-else class="value">
-                {{ getValue(row, column).value }}
-                <small v-if="getValue(row, column).unit" class="unit has-text-grey">
-                  {{ getValue(row, column).unit }}
+                {{ getValue(row, dimension).value }}
+                <small v-if="getValue(row, dimension).unit" class="unit has-text-grey">
+                  {{ getValue(row, dimension).unit }}
                 </small>
               </span>
             </div>
@@ -123,56 +123,10 @@ export default {
     DesignerValueForm,
     InputLanguage
   },
+  props: ['cube'],
 
   data () {
     return {
-      cube: {
-        type: 'cube',
-        label: [{ value: 'Quality of air in Switzerland', language: 'en' }]
-      },
-      columns: [
-        {
-          type: 'dimension',
-          label: [{ value: 'Station', language: 'en' }],
-          uri: 'station',
-          scaleOfMeasure: 'concept'
-        },
-        {
-          type: 'dimension',
-          label: [{ value: 'Year', language: 'en' }],
-          uri: 'year',
-          scaleOfMeasure: 'temporal'
-        },
-        {
-          type: 'dimension',
-          label: [{ value: 'Measurement', language: 'en' }],
-          uri: 'measurement',
-          scaleOfMeasure: 'continuous'
-        },
-      ],
-      data: [
-        {
-          station: { value: 'Basel' },
-          year: { value: '2001' },
-          measurement: { value: '12.1', unit: 'µg/m³' },
-        },
-        {
-          station: { value: 'Basel' },
-          year: { value: '2002' },
-          measurement: { value: '24.2', unit: 'µg/m³' },
-        },
-        {
-          station: { value: 'Basel' },
-          year: { value: '2003' },
-          measurement: { value: '5.1', unit: 'µg/m³' },
-        }
-      ],
-      languages: [
-        { label: 'English', code: 'en' },
-        { label: 'French', code: 'fr' },
-        { label: 'German', code: 'de' },
-      ],
-
       selectedLanguage: 'en',
       edited: null,
     }
@@ -195,8 +149,8 @@ export default {
       this.edited = null
     },
 
-    getValue (row, column) {
-      return row[column.uri]
+    getValue (row, dimension) {
+      return row[dimension.uri]
     },
 
     getLabel (resource) {
@@ -220,7 +174,7 @@ export default {
       }
 
       if (this.edited.type === 'dimension') {
-        return `Edit dimension ${this.edited.label}`
+        return `Edit dimension ${this.getLabel(this.edited)}`
       }
 
       if (this.edited.type === 'value') {

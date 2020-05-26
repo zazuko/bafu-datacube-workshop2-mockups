@@ -1,24 +1,20 @@
 <template>
   <b-select v-bind="$attrs" v-on="$listeners">
-    <option v-for="language in languages" :key="language.uri" :value="language.uri">
+    <option v-for="language in languages" :key="language.code" :value="language.code">
       {{ language.label }}
     </option>
   </b-select>
 </template>
 
 <script>
+import data from '@/data'
+
 export default {
   name: 'InputLanguage',
   data () {
     return {
-      value: 'en',
-      languages: [
-        { uri: 'en', label: 'en' },
-        { uri: 'fr', label: 'fr' },
-        { uri: 'de', label: 'de' },
-        { uri: 'it', label: 'it' },
-      ]
+      languages: data.languages
     }
-  }
+  },
 }
 </script>

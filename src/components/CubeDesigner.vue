@@ -28,10 +28,18 @@
             </div>
             <div class="dimension-actions">
               <ButtonEdit @click="editDimension(dimension)" title="Edit dimension" />
-              <b-tooltip label="Filter dimension" type="is-light" :delay="200" size="is-small">
-                <b-button type="is-white" class="has-text-grey" size="is-small" icon-left="filter">
-                </b-button>
-              </b-tooltip>
+              <b-dropdown>
+                <b-tooltip slot="trigger" label="Filter dimension" type="is-light" :delay="200" size="is-small">
+                  <b-button type="is-white" class="has-text-grey" size="is-small" icon-left="filter">
+                  </b-button>
+                </b-tooltip>
+                <div class="dimension-filter">
+                  <FiltersContinuous v-if="dimension.scaleOfMeasure === 'continuous'" :dimension="dimension" />
+                  <FiltersTemporal v-else-if="dimension.scaleOfMeasure === 'temporal'" :dimension="dimension" />
+                  <FiltersConcept v-else-if="dimension.scaleOfMeasure === 'concept'" :dimension="dimension" />
+                  <p v-else>Cannot filter this type of dimension</p>
+                </div>
+              </b-dropdown>
             </div>
           </th>
         </tr>
@@ -141,6 +149,10 @@ tbody .cell-content {
   display: flex;
   justify-content: flex-start;
 }
+
+.dimension-filter {
+  padding: 0 1rem;
+}
 </style>
 
 <script>
@@ -150,6 +162,9 @@ import DesignerCubeForm from '@/components/DesignerCubeForm.vue'
 import DesignerDimensionForm from '@/components/DesignerDimensionForm.vue'
 import DesignerValueForm from '@/components/DesignerValueForm.vue'
 import InputLanguage from '@/components/InputLanguage.vue'
+import FiltersContinuous from '@/components/FiltersContinuous.vue'
+import FiltersTemporal from '@/components/FiltersTemporal.vue'
+import FiltersConcept from '@/components/FiltersConcept.vue'
 
 export default {
   name: 'Designer',
@@ -159,7 +174,10 @@ export default {
     DesignerCubeForm,
     DesignerDimensionForm,
     DesignerValueForm,
-    InputLanguage
+    InputLanguage,
+    FiltersContinuous,
+    FiltersTemporal,
+    FiltersConcept
   },
   props: ['cube'],
 

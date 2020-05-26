@@ -1,5 +1,5 @@
 <template>
-  <div class="Designer">
+  <div class="Designer section">
     <CubeDesigner :cube="cube"/>
   </div>
 </template>

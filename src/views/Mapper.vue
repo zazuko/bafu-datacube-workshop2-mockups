@@ -1,29 +1,78 @@
 <template>
   <div class="Mapper">
-    <div class="mapping columns">
-      <div class="column">
-        <h2 class="title is-6">Input sources</h2>
-        <div v-for="source in sources" :key="source.uri" class="source panel">
-          <p class="panel-heading">{{ source.label }}</p>
-          <p class="panel-tabs">
-            <a class="is-active">All</a>
-            <a>Mapped</a>
-            <a>Not mapped</a>
-          </p>
-          <div v-for="column in source.columns" :key="column" class="panel-block">
-            {{ column }}
+    <div class="mapping">
+      <header class="columns">
+        <div class="column">
+          <div class="level">
+            <div class="level-left">
+              <h2 class="title is-6">Input sources</h2>
+            </div>
+            <div class="level-right">
+              <p class="level-item">Filter columns:</p>
+              <b-field class="level-item">
+                <b-radio-button v-model="columnFilter" native-value="all" size="is-small">
+                  All
+                </b-radio-button>
+                <b-radio-button v-model="columnFilter" native-value="mapped" size="is-small">
+                  Mapped
+                </b-radio-button>
+                <b-radio-button v-model="columnFilter" native-value="not-mapped" size="is-small">
+                  Not mapped
+                </b-radio-button>
+              </b-field>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="column is-1">
-        <p class="has-text-centered"><b-icon icon="arrow-right" size="is-small" /></p>
-      </div>
-      <div class="column">
-        <h2 class="title is-6">Output tables</h2>
-        <div v-for="table in tables" :key="table.uri" class="table panel">
-          <p class="panel-heading" :style="{ 'background-color': table.color }">{{ table.label }}</p>
-          <div v-for="attribute in table.attributes" :key="attribute.uri" class="panel-block">
-            {{ attribute.label }}
+        <div class="column is-1">
+          <p class="has-text-centered"><b-icon icon="arrow-right" size="is-small" /></p>
+        </div>
+        <div class="column">
+          <h2 class="title is-6">Output tables</h2>
+        </div>
+      </header>
+
+      <div class="source-mapping columns" v-for="source in sources" :key="source.uri">
+        <div class="column">
+          <div class="source panel">
+            <div class="panel-heading">
+              <div class="level">
+                <div class="level-left">
+                  {{ source.label }}
+                </div>
+                <div class="level-right">
+                  <b-button :disabled="selectedColumns.length === 0">
+                    Create table from selected columns
+                  </b-button>
+                </div>
+              </div>
+            </div>
+            <div v-for="column in source.columns" :key="column.uri" class="panel-block">
+              <b-checkbox v-model="selectedColumns" :native-value="column.uri">
+                {{ column.uri }}
+                <span class="has-text-grey">
+                  ({{ column.data.join(', ') }})
+                </span>
+              </b-checkbox>
+            </div>
+          </div>
+        </div>
+        <div class="column is-1"></div>
+        <div class="column">
+          <div v-for="table in getSourceTables(source)" :key="table.uri" class="table panel">
+            <div class="panel-heading" :style="{ 'background-color': table.color }">
+              <div class="level">
+                <div class="level-left">
+                  {{ table.label }}
+                </div>
+                <div class="level-right">
+                  <ButtonEdit title="Edit table" />
+                </div>
+              </div>
+            </div>
+            <div v-for="attribute in table.attributes" :key="attribute.uri" class="panel-block">
+              {{ attribute.label }}
+              <ButtonEdit title="Edit table" />
+            </div>
           </div>
         </div>
       </div>
@@ -43,7 +92,9 @@
         </b-button>
       </header>
       <div class="cube-preview-content">
-        <CubeDesigner :cube="cube" />
+        <div class="section">
+          <CubeDesigner :cube="cube" />
+        </div>
       </div>
     </div>
   </div>
@@ -52,6 +103,21 @@
 <style scoped>
 .mapping {
   padding: 0 1rem;
+  max-width: 110rem;
+}
+
+.source-mapping:not(:last-child) {
+  margin-bottom: 2rem;
+}
+
+.source-mapping .panel,
+.source-mapping .panel .button {
+  font-size: 0.8rem;
+}
+
+.source-mapping .panel .panel-block {
+  display: flex;
+  justify-content: space-between;
 }
 
 .cube-preview {
@@ -83,17 +149,21 @@
 
 <script>
 import CubeDesigner from '@/components/CubeDesigner.vue'
+import ButtonEdit from '@/components/ButtonEdit.vue'
 import data from '@/data'
 
 export default {
   name: 'Mapper',
-  components: { CubeDesigner },
+  components: { CubeDesigner, ButtonEdit },
 
   data () {
     return {
       sources: data.sources,
       tables: data.tables,
       cube: data.cube,
+
+      columnFilter: 'all',
+      selectedColumns: [],
       showPreview: false,
     }
   },
@@ -101,6 +171,10 @@ export default {
   methods: {
     togglePreview () {
       this.showPreview = !this.showPreview
+    },
+
+    getSourceTables (source) {
+      return this.tables.filter((table) => table.source === source.uri)
     }
   }
 }

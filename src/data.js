@@ -3,17 +3,41 @@ export default {
     {
       uri: 'stations.csv',
       label: 'stations.csv',
-      columns: ['station_id', 'pollutant_id'],
+      columns: [
+        { uri: 'station_id', data: ['1', '2', '3'] },
+        { uri: 'station_name', data: ['Aarau', 'Basel', 'Zurich'] },
+        { uri: 'station_measuring_network', data: ['AG', 'BA', 'ZU'] },
+        { uri: 'station_canton', data: ['AG', 'BA', 'ZU'] },
+        { uri: 'station_y', data: ['646350', '646381', '646811'] },
+        { uri: 'station_x', data: ['249400', '249313', '249119'] },
+        { uri: 'station_altitude', data: ['383', '649', '700'] },
+        { uri: 'area_type_de', data: ['Städtisch'] },
+        { uri: 'pollutant_id', data: ['NO2', 'OX4'] },
+        { uri: 'station_type_de', data: ['Verkehr'] },
+        { uri: 'aggregation_name_de', data: ['95%-Wert der 1/2h-Mittel'] },
+        { uri: 'limitvalue', data: ['100'] },
+        { uri: 'year', data: ['1986', '2000', '2001'] },
+        { uri: 'value', data: ['80,1', '51,3', '62,2'] },
+        { uri: 'unit_name_de', data: ['µg/m3'] },
+        { uri: 'value_remark', data: [] },
+      ],
     },
     {
       uri: 'pollutants.csv',
       label: 'pollutants.csv',
-      columns: ['pollutant_id', 'pollutant_name_de', 'pollutant_name_en'],
+      columns: [
+        { uri: 'pollutant_id', data: ['NO2', 'OX4'] },
+        { uri: 'pollutant_name_de', data: ['Stickstoffdioxid'] },
+        { uri: 'pollutant_name_en', data: ['Stickstoffdioxid'] },
+        { uri: 'pollutant_description_de', data: [] },
+        { uri: 'pollutant_description_en', data: [] },
+      ],
     },
   ],
 
   tables: [
     {
+      source: 'stations.csv',
       uri: 'Measurement',
       label: 'Measurement',
       color: 'rgb(165, 214, 167)',
@@ -25,6 +49,7 @@ export default {
       ]
     },
     {
+      source: 'stations.csv',
       uri: 'Station',
       label: 'Station',
       color: 'rgb(129, 212, 250)',
@@ -33,6 +58,7 @@ export default {
       ]
     },
     {
+      source: 'pollutants.csv',
       uri: 'Pollutant',
       label: 'Pollutant',
       color: 'rgb(239, 154, 154)',
@@ -52,7 +78,7 @@ export default {
         description: [],
         uri: 'station',
         scaleOfMeasure: 'concept',
-        color: 'rgb(165, 214, 167)',
+        color: 'rgb(129, 212, 250)',
       },
       {
         type: 'dimension',

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <b-navbar>
-      <template slot="start">
+      <template slot="end">
         <b-navbar-item tag="router-link" :to="{ name: 'Mapper' }">
           Mapper
         </b-navbar-item>

@@ -64,16 +64,28 @@
                 <div class="level-left">
                   {{ table.label }}
                 </div>
-                <div class="level-right">
+                <div class="level-right actions">
                   <ButtonEdit title="Edit table" />
+                  <ButtonDelete title="Delete table" />
                 </div>
               </div>
             </div>
             <div v-for="attribute in table.attributes" :key="attribute.uri" class="panel-block">
               {{ attribute.label }}
-              <ButtonEdit title="Edit table" />
+              <div class="actions">
+                <ButtonEdit title="Edit attribute" />
+                <ButtonDelete title="Delete attribute" />
+              </div>
+            </div>
+            <div class="panel-block">
+              <b-button icon-left="plus" />
             </div>
           </div>
+          <b-field>
+            <b-button icon-left="plus">
+              Add table
+            </b-button>
+          </b-field>
         </div>
       </div>
     </div>
@@ -145,16 +157,21 @@
 .is-collapsed .cube-preview-content {
   height: 0;
 }
+
+.actions > *:not(:last-child) {
+  margin-right: 0.2rem;
+}
 </style>
 
 <script>
 import CubeDesigner from '@/components/CubeDesigner.vue'
 import ButtonEdit from '@/components/ButtonEdit.vue'
+import ButtonDelete from '@/components/ButtonDelete.vue'
 import data from '@/data'
 
 export default {
   name: 'Mapper',
-  components: { CubeDesigner, ButtonEdit },
+  components: { CubeDesigner, ButtonEdit, ButtonDelete },
 
   data () {
     return {

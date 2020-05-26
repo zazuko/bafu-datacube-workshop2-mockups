@@ -1,16 +1,16 @@
 <template>
-  <b-dropdown v-bind="$attrs" v-on="$listeners" aria-role="select">
+  <b-dropdown v-bind="$attrs" v-on="$listeners">
     <button class="button" type="button" slot="trigger">
       <template>
-          <b-icon :icon="selectedScale.icon" size="is-small"></b-icon>
-          <span>{{ selectedScale.label }}</span>
+        <b-icon :icon="selectedScale.icon" size="is-small"></b-icon>
+        <span>{{ selectedScale.label }}</span>
       </template>
       <b-icon icon="chevron-down" size="is-small" type="is-primary"></b-icon>
     </button>
     <b-dropdown-item
       v-for="scale in scales"
       :key="scale.uri"
-      :value="scale.uri" aria-role="option">
+      :value="scale.uri" role="option">
       <div class="media">
         <b-icon class="media-left" :icon="scale.icon" size="is-small" />
         <div class="media-content">

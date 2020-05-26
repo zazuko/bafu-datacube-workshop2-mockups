@@ -36,7 +36,7 @@
                 <div class="dimension-filter">
                   <FiltersContinuous v-if="dimension.scaleOfMeasure === 'continuous'" :dimension="dimension" />
                   <FiltersTemporal v-else-if="dimension.scaleOfMeasure === 'temporal'" :dimension="dimension" />
-                  <FiltersConcept v-else-if="dimension.scaleOfMeasure === 'concept'" :dimension="dimension" />
+                  <FiltersNominal v-else-if="dimension.scaleOfMeasure === 'nominal'" :dimension="dimension" />
                   <p v-else>Cannot filter this type of dimension</p>
                 </div>
               </b-dropdown>
@@ -49,7 +49,7 @@
           <td v-for="dimension in cube.dimensions" :key="dimension.uri" :class="'scale-' + dimension.scaleOfMeasure">
             <div class="cell-content">
               <b-button
-                v-if="dimension.scaleOfMeasure === 'concept'"
+                v-if="dimension.scaleOfMeasure === 'nominal'"
                 @click="editValue(row, dimension.uri)"
                 title="Edit entity"
                 :rounded="true"
@@ -113,7 +113,11 @@ tbody .cell-content {
   justify-content: flex-end;
 }
 
-.scale-concept .cell-content {
+.scale-none .cell-content {
+  justify-content: flex-start;
+}
+
+.scale-nominal .cell-content {
   justify-content: flex-start;
 }
 
@@ -164,7 +168,7 @@ import DesignerValueForm from '@/components/DesignerValueForm.vue'
 import InputLanguage from '@/components/InputLanguage.vue'
 import FiltersContinuous from '@/components/FiltersContinuous.vue'
 import FiltersTemporal from '@/components/FiltersTemporal.vue'
-import FiltersConcept from '@/components/FiltersConcept.vue'
+import FiltersNominal from '@/components/FiltersNominal.vue'
 
 export default {
   name: 'Designer',
@@ -177,7 +181,7 @@ export default {
     InputLanguage,
     FiltersContinuous,
     FiltersTemporal,
-    FiltersConcept
+    FiltersNominal
   },
   props: ['cube'],
 

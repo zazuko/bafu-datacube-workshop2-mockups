@@ -19,7 +19,7 @@ export default {
         { uri: 'year', data: ['1986', '2000', '2001'] },
         { uri: 'value', data: ['80,1', '51,3', '62,2'] },
         { uri: 'unit_name_de', data: ['µg/m3'] },
-        { uri: 'value_remark', data: [] },
+        { uri: 'value_remark', data: ['A textual remark'] },
       ],
     },
     {
@@ -44,6 +44,7 @@ export default {
       attributes: [
         { uri: 'year', label: 'Year' },
         { uri: 'measurement', label: 'Measurement' },
+        { uri: 'value_remark', label: 'Remark' },
         { uri: 'station', label: 'Station' },
         { uri: 'pollutant', label: 'Pollutant' },
       ]
@@ -77,7 +78,7 @@ export default {
         label: [{ value: 'Station', language: 'en' }],
         description: [],
         uri: 'station',
-        scaleOfMeasure: 'concept',
+        scaleOfMeasure: 'nominal',
         color: 'rgb(129, 212, 250)',
       },
       {
@@ -85,7 +86,7 @@ export default {
         label: [{ value: 'Pollutant', language: 'en' }],
         description: [],
         uri: 'pollutant',
-        scaleOfMeasure: 'concept',
+        scaleOfMeasure: 'nominal',
         color: 'rgb(239, 154, 154)',
         isManaged: true,
       },
@@ -103,6 +104,13 @@ export default {
         uri: 'measurement',
         scaleOfMeasure: 'continuous',
       },
+      {
+        type: 'dimension',
+        label: [{ value: 'Remark', language: 'en' }],
+        description: [],
+        uri: 'remark',
+        scaleOfMeasure: 'none',
+      },
     ],
     data: [
       {
@@ -110,36 +118,42 @@ export default {
         pollutant: { value: 'Stickstoffdioxid' },
         year: { value: '2001' },
         measurement: { value: '12.1', unit: 'µg/m³' },
+        remark: { value: '' },
       },
       {
         station: { value: 'Basel' },
         pollutant: { value: 'Stickstoffdioxid' },
         year: { value: '2002' },
         measurement: { value: '24.2', unit: 'µg/m³' },
+        remark: { value: 'A textual remark' },
       },
       {
         station: { value: 'Basel' },
         pollutant: { value: 'Stickstoffdioxid' },
         year: { value: '2003' },
         measurement: { value: '5.1', unit: 'µg/m³' },
+        remark: { value: '' },
       },
       {
         station: { value: 'Aarau' },
         pollutant: { value: 'Stickstoffdioxid' },
         year: { value: '2001' },
         measurement: { value: '3.1', unit: 'µg/m³' },
+        remark: { value: '' },
       },
       {
         station: { value: 'Aarau' },
         pollutant: { value: 'Stickstoffdioxid' },
         year: { value: '2002' },
         measurement: { value: '15.1', unit: 'µg/m³' },
+        remark: { value: '' },
       },
       {
         station: { value: 'Aarau' },
         pollutant: { value: 'Stickstoffdioxid' },
         year: { value: '2003' },
         measurement: { value: '45.1', unit: 'µg/m³' },
+        remark: { value: '' },
       },
     ],
   },
@@ -152,8 +166,9 @@ export default {
   ],
 
   scaleOfMeasures: [
+    { uri: 'none', label: 'None', icon: 'minus' },
     { uri: 'continuous', label: 'Continuous', icon: 'ruler-horizontal' },
-    { uri: 'concept', label: 'Concept', icon: 'list' },
-    { uri: 'temporal', label: 'Temporal', icon: 'clock' }
+    { uri: 'nominal', label: 'Nominal', icon: 'list' },
+    { uri: 'temporal', label: 'Temporal', icon: 'clock' },
   ]
 }

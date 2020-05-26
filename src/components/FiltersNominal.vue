@@ -24,7 +24,7 @@
 import data from '@/data'
 
 export default {
-  name: 'FiltersConcept',
+  name: 'FiltersNominal',
   props: ['dimension'],
 
   data () {

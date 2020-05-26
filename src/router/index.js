@@ -9,7 +9,7 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    redirect: { name: 'Designer' }
+    redirect: { name: 'Mapper' }
   },
   {
     path: '/mapper',

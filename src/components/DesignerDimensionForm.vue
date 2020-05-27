@@ -1,20 +1,7 @@
 <template>
   <form class="form">
-    <b-field label="Label" :addons="false">
-      <b-field v-for="(label, index) in value.label" :key="index">
-        <b-input v-model="label.value" class="is-expanded" />
-        <InputLanguage v-model="label.language" />
-      </b-field>
-      <b-button icon-left="plus" title="Add a value" type="is-white" />
-    </b-field>
-
-    <b-field label="Description" :addons="false">
-      <b-field v-for="(description, index) in value.description" :key="index">
-        <b-input v-model="description.value" type="textarea" class="is-expanded" />
-        <InputLanguage v-model="description.language" />
-      </b-field>
-      <b-button icon-left="plus" title="Add a value" type="is-white" />
-    </b-field>
+    <InputMultiValue label="Label" v-model="value.label" />
+    <InputMultiValue label="Description" v-model="value.description" input-type="textarea" />
 
     <b-field label="Scale of measure" :addons="false">
       <InputScaleOfMeasure v-model="value.scaleOfMeasure" />
@@ -29,12 +16,12 @@
 </template>
 
 <script>
-import InputLanguage from './InputLanguage.vue'
+import InputMultiValue from './InputMultiValue.vue'
 import InputScaleOfMeasure from './InputScaleOfMeasure.vue'
 
 export default {
   name: 'DesignerDimensionForm',
-  components: { InputLanguage, InputScaleOfMeasure },
+  components: { InputMultiValue, InputScaleOfMeasure },
   props: ['value'],
 }
 </script>

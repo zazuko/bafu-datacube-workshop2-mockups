@@ -1,21 +1,20 @@
 <template>
   <form class="form">
-    <b-field v-for="property in properties" :key="property" :label="property" :addons="false">
-      <b-field v-for="(propertyValue, index) in value[property]" :key="index">
-        <b-input v-model="propertyValue.value" class="is-expanded" />
-        <InputLanguage v-model="propertyValue.language" v-if="propertyValue.hasOwnProperty('language')" />
-      </b-field>
-      <b-button icon-left="plus" title="Add a value" type="is-white" />
-    </b-field>
+    <InputMultiValue
+      v-for="property in properties"
+      :key="property"
+      :label="property"
+      v-model="value[property]"
+    />
   </form>
 </template>
 
 <script>
-import InputLanguage from './InputLanguage.vue'
+import InputMultiValue from './InputMultiValue.vue'
 
 export default {
   name: 'DesignerValueForm',
-  components: { InputLanguage },
+  components: { InputMultiValue },
   props: ['value'],
 
   computed: {

@@ -74,6 +74,7 @@ export default {
   cube: {
     type: 'cube',
     label: [{ value: 'Quality of air in Switzerland', language: 'en' }],
+    description: [],
     dimensions: [
       {
         type: 'dimension',

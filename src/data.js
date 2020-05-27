@@ -75,6 +75,10 @@ export default {
     type: 'cube',
     label: [{ value: 'Quality of air in Switzerland', language: 'en' }],
     description: [],
+    publishers: [{ value: 'Bundesamt für Umwelt BAFU', language: 'de' }],
+    contactPoints: [],
+    languages: [{ value: 'German' }],
+    landingPage: [],
     dimensions: [
       {
         type: 'dimension',

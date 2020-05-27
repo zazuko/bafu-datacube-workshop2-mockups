@@ -14,7 +14,7 @@ import InputLanguage from './InputLanguage.vue'
 
 export default {
   name: 'InputMultiValue',
-  props: ['value', 'label', 'input-type'],
+  props: ['value', 'label', 'input-type', 'disable-language'],
   components: { InputLanguage },
 
   data () {
@@ -25,7 +25,7 @@ export default {
 
   computed: {
     showLanguage () {
-      return (
+      return !this.disableLanguage && (
         this.isEmptyOnLoad ||
         Object.prototype.hasOwnProperty.call(this.value[0], 'language')
       )

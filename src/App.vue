@@ -10,6 +10,14 @@
         </b-navbar-item>
       </template>
     </b-navbar>
-    <router-view/>
+    <router-view />
   </div>
 </template>
+
+<style scoped>
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+</style>

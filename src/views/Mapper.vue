@@ -31,73 +31,75 @@
         </div>
       </header>
 
-      <div class="source-mapping columns" v-for="source in sources" :key="source.uri">
-        <div class="column">
-          <div class="source panel">
-            <div class="panel-heading">
-              <div class="level">
-                <div class="level-left">
-                  {{ source.label }}
-                </div>
-                <div class="level-right">
-                  <b-button :disabled="selectedColumns[source.uri].length === 0">
-                    Create table from selected columns
-                  </b-button>
+      <div class="mapping-sources">
+        <div class="source-mapping columns" v-for="source in sources" :key="source.uri">
+          <div class="column">
+            <div class="source panel">
+              <div class="panel-heading">
+                <div class="level">
+                  <div class="level-left">
+                    {{ source.label }}
+                  </div>
+                  <div class="level-right">
+                    <b-button :disabled="selectedColumns[source.uri].length === 0">
+                      Create table from selected columns
+                    </b-button>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div v-for="column in source.columns" :key="column.uri" class="panel-block">
-              <b-checkbox v-model="selectedColumns[source.uri]" :native-value="column.uri">
-                {{ column.uri }}
-                <span class="has-text-grey">
-                  ({{ column.data.join(', ') }})
-                </span>
-              </b-checkbox>
-              <div class="column-mapped-attributes">
-                <b-tooltip
-                  v-for="attribute in getMappedAttributes(source, column)"
-                  :key="attribute.uri"
-                  class="column-mapped-attribute"
-                  :style="{ 'background-color': attribute.table.color }"
-                  :label="attribute.table.label + ' -> ' + attribute.label"
-                  type="is-light"
-                  :delay="200"
-                  size="is-small"
-                />
+              <div v-for="column in source.columns" :key="column.uri" class="panel-block">
+                <b-checkbox v-model="selectedColumns[source.uri]" :native-value="column.uri">
+                  {{ column.uri }}
+                  <span class="has-text-grey">
+                    ({{ column.data.join(', ') }})
+                  </span>
+                </b-checkbox>
+                <div class="column-mapped-attributes">
+                  <b-tooltip
+                    v-for="attribute in getMappedAttributes(source, column)"
+                    :key="attribute.uri"
+                    class="column-mapped-attribute"
+                    :style="{ 'background-color': attribute.table.color }"
+                    :label="attribute.table.label + ' -> ' + attribute.label"
+                    type="is-light"
+                    :delay="200"
+                    size="is-small"
+                  />
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="column is-1"></div>
-        <div class="column">
-          <div v-for="table in getSourceTables(source)" :key="table.uri" class="table panel">
-            <div class="panel-heading" :style="{ 'background-color': table.color }">
-              <div class="level">
-                <div class="level-left">
-                  {{ table.label }}
-                </div>
-                <div class="level-right actions">
-                  <ButtonEdit title="Edit table" />
-                  <ButtonDelete title="Delete table" />
+          <div class="column is-1"></div>
+          <div class="column">
+            <div v-for="table in getSourceTables(source)" :key="table.uri" class="table panel">
+              <div class="panel-heading" :style="{ 'background-color': table.color }">
+                <div class="level">
+                  <div class="level-left">
+                    {{ table.label }}
+                  </div>
+                  <div class="level-right actions">
+                    <ButtonEdit title="Edit table" />
+                    <ButtonDelete title="Delete table" />
+                  </div>
                 </div>
               </div>
-            </div>
-            <div v-for="attribute in table.attributes" :key="attribute.uri" class="panel-block">
-              {{ attribute.label }}
-              <div class="actions">
-                <ButtonEdit title="Edit attribute" />
-                <ButtonDelete title="Delete attribute" />
+              <div v-for="attribute in table.attributes" :key="attribute.uri" class="panel-block">
+                {{ attribute.label }}
+                <div class="actions">
+                  <ButtonEdit title="Edit attribute" />
+                  <ButtonDelete title="Delete attribute" />
+                </div>
+              </div>
+              <div class="panel-block">
+                <b-button icon-left="plus" />
               </div>
             </div>
-            <div class="panel-block">
-              <b-button icon-left="plus" />
-            </div>
+            <b-field>
+              <b-button icon-left="plus">
+                Add table
+              </b-button>
+            </b-field>
           </div>
-          <b-field>
-            <b-button icon-left="plus">
-              Add table
-            </b-button>
-          </b-field>
         </div>
       </div>
     </div>
@@ -125,9 +127,24 @@
 </template>
 
 <style scoped>
+.Mapper {
+  overflow-y: hidden;
+
+  display: flex;
+  flex-direction: column;
+}
+
 .mapping {
+  overflow-y: hidden;
   padding: 0 1rem;
   max-width: 100rem;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.mapping-sources {
+  overflow-y: auto;
 }
 
 .source-mapping:not(:last-child) {
@@ -145,8 +162,6 @@
 }
 
 .cube-preview {
-  position: absolute;
-  bottom: 0;
   width: 100%;
   background-color: white;
 }

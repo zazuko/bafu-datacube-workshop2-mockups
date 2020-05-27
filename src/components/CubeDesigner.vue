@@ -48,8 +48,8 @@
             <div class="cell-content">
               <b-button
                 v-if="dimension.scaleOfMeasure === 'nominal'"
-                @click="editValue(row, dimension.uri)"
-                title="Edit entity"
+                @click="editResource(getValue(row, dimension))"
+                title="Edit resource"
                 :rounded="true"
                 size="is-small"
                 icon-left="pen"
@@ -72,7 +72,7 @@
     <SidePane :isOpen="showSidePane" :title="sidePanelTitle" @close="onCloseSidePane">
       <DesignerCubeForm v-if="edited && edited.type === 'cube'" :value="edited" />
       <DesignerDimensionForm v-else-if="edited && edited.type === 'dimension'" :value="edited" />
-      <DesignerValueForm v-else-if="edited && edited.type === 'value'" :value="edited" />
+      <DesignerResourceForm v-else-if="edited && edited.type === 'resource'" :value="edited" />
       <p v-else>Unsupported type</p>
     </SidePane>
   </div>
@@ -162,7 +162,7 @@ import ButtonEdit from '@/components/ButtonEdit.vue'
 import SidePane from '@/components/SidePane.vue'
 import DesignerCubeForm from '@/components/DesignerCubeForm.vue'
 import DesignerDimensionForm from '@/components/DesignerDimensionForm.vue'
-import DesignerValueForm from '@/components/DesignerValueForm.vue'
+import DesignerResourceForm from '@/components/DesignerResourceForm.vue'
 import InputLanguage from '@/components/InputLanguage.vue'
 import FiltersContinuous from '@/components/FiltersContinuous.vue'
 import FiltersTemporal from '@/components/FiltersTemporal.vue'
@@ -176,7 +176,7 @@ export default {
     SidePane,
     DesignerCubeForm,
     DesignerDimensionForm,
-    DesignerValueForm,
+    DesignerResourceForm,
     InputLanguage,
     FiltersContinuous,
     FiltersTemporal,
@@ -201,8 +201,8 @@ export default {
       this.edited = dimension
     },
 
-    editValue (row, property) {
-      this.edited = { type: 'value', row, property }
+    editResource (resource) {
+      this.edited = resource
     },
 
     onCloseSidePane () {
@@ -248,9 +248,8 @@ export default {
         return `Edit dimension ${this.getLabel(this.edited)}`
       }
 
-      if (this.edited.type === 'value') {
-        const value = this.edited.row[this.edited.property]
-        return `Edit value ${value.value}`
+      if (this.edited.type === 'resource') {
+        return `Edit resource ${this.getLabel(this.edited)}`
       }
 
       return ''

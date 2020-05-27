@@ -160,13 +160,19 @@ export default {
     ],
     resources: {
       Basel: {
-        label: [{ value: 'Basel', language: 'en' }, { value: 'Basel', language: 'de' }]
+        type: 'resource',
+        label: [{ value: 'Basel', language: 'en' }, { value: 'Basel', language: 'de' }],
+        id: [{ value: 1 }],
       },
       Aarau: {
-        label: [{ value: 'Aarau', language: 'en' }, { value: 'Aarau', language: 'de' }]
+        type: 'resource',
+        label: [{ value: 'Aarau', language: 'en' }, { value: 'Aarau', language: 'de' }],
+        id: [{ value: 2 }],
       },
       Stickstoffdioxid: {
-        label: [{ value: 'Nitrogen dioxide', language: 'en' }, { value: 'Stickstoffdioxid', language: 'de' }]
+        type: 'resource',
+        label: [{ value: 'Nitrogen dioxide', language: 'en' }, { value: 'Stickstoffdioxid', language: 'de' }],
+        id: [{ value: 13344 }],
       },
     }
   },

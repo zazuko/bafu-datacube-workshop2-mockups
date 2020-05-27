@@ -55,7 +55,8 @@ export default {
       label: 'Station',
       color: 'rgb(129, 212, 250)',
       attributes: [
-        { uri: 'id', label: 'ID', column: 'station_id' },
+        { uri: 'id', label: 'Identifier', column: 'station_id' },
+        { uri: 'label', label: 'Label', column: 'station_name_de' },
       ]
     },
     {
@@ -64,7 +65,8 @@ export default {
       label: 'Pollutant',
       color: 'rgb(239, 154, 154)',
       attributes: [
-        { uri: 'id', label: 'ID', column: 'pollutant_id' },
+        { uri: 'id', label: 'Identifier', column: 'pollutant_id' },
+        { uri: 'label', label: 'Label', column: 'pollutant_name_de' },
       ]
     },
   ],
@@ -75,7 +77,7 @@ export default {
     dimensions: [
       {
         type: 'dimension',
-        label: [{ value: 'Station', language: 'en' }],
+        label: [{ value: 'Station', language: 'en' }, { value: 'Station', language: 'de' }],
         description: [],
         uri: 'station',
         scaleOfMeasure: 'nominal',
@@ -156,6 +158,17 @@ export default {
         remark: { value: '' },
       },
     ],
+    resources: {
+      Basel: {
+        label: [{ value: 'Basel', language: 'en' }, { value: 'Basel', language: 'de' }]
+      },
+      Aarau: {
+        label: [{ value: 'Aarau', language: 'en' }, { value: 'Aarau', language: 'de' }]
+      },
+      Stickstoffdioxid: {
+        label: [{ value: 'Nitrogen dioxide', language: 'en' }, { value: 'Stickstoffdioxid', language: 'de' }]
+      },
+    }
   },
 
   languages: [

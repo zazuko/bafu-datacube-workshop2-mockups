@@ -6,8 +6,7 @@
           <th :colspan="cube.dimensions.length">
             <div class="cell-content">
               <ButtonEdit title="Edit cube metadata" @click="editCube(cube)" />
-              <span v-if="getLabel(cube)">{{ getLabel(cube) }}</span>
-              <span v-else class="has-text-grey">Untitled Cube</span>
+              <ResourceLabel :resource="cube" :language="selectedLanguage" missing="Untitled Cube" />
               <InputLanguage v-model="selectedLanguage" size="is-small" />
             </div>
           </th>
@@ -15,8 +14,7 @@
         <tr class="dimensions-row">
           <th v-for="dimension in cube.dimensions" :key="dimension.uri" :class="'scale-' + dimension.scaleOfMeasure" align>
             <div class="cell-content">
-              <span v-if="getLabel(dimension)">{{ getLabel(dimension) }}</span>
-              <span v-else class="has-text-grey">Missing label</span>
+              <ResourceLabel :resource="dimension" :language="selectedLanguage" />
               <div class="dimension-infos">
                 <b-tooltip v-if="getDescription(dimension)" :label="getDescription(dimension)" type="is-light" :delay="200" size="is-small">
                   <b-icon icon="comment-alt" pack="far" />
@@ -57,7 +55,7 @@
                 icon-left="pen"
                 :style="{ 'background-color': dimension.color}"
               >
-                {{ getValue(row, dimension).value }}
+                <ResourceLabel :resource="getValue(row, dimension)" :language="selectedLanguage" />
               </b-button>
               <span v-else class="value">
                 {{ getValue(row, dimension).value }}
@@ -169,6 +167,7 @@ import InputLanguage from '@/components/InputLanguage.vue'
 import FiltersContinuous from '@/components/FiltersContinuous.vue'
 import FiltersTemporal from '@/components/FiltersTemporal.vue'
 import FiltersNominal from '@/components/FiltersNominal.vue'
+import ResourceLabel from '@/components/ResourceLabel.vue'
 
 export default {
   name: 'Designer',
@@ -181,7 +180,8 @@ export default {
     InputLanguage,
     FiltersContinuous,
     FiltersTemporal,
-    FiltersNominal
+    FiltersNominal,
+    ResourceLabel,
   },
   props: ['cube'],
 
@@ -210,7 +210,13 @@ export default {
     },
 
     getValue (row, dimension) {
-      return row[dimension.uri]
+      const value = row[dimension.uri]
+
+      if (dimension.scaleOfMeasure === 'nominal') {
+        return this.cube.resources[value.value]
+      }
+
+      return value
     },
 
     getLabel (resource) {

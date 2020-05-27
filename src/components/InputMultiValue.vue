@@ -3,6 +3,7 @@
     <b-field v-for="(subValue, index) in value" :key="index">
       <b-input v-model="subValue.value" class="is-expanded" :type="inputType" />
       <InputLanguage v-model="subValue.language" v-if="showLanguage" />
+      <b-button icon-left="times" title="Remove value" @click="removeValue(index)" />
     </b-field>
     <b-button icon-left="plus" title="Add a value" type="is-white" @click="addValue" />
   </b-field>
@@ -34,6 +35,10 @@ export default {
   methods: {
     addValue () {
       this.value.push({ value: '' })
+    },
+
+    removeValue (index) {
+      this.value.splice(index, 1)
     }
   }
 }

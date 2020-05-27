@@ -16,6 +16,9 @@
             <div class="cell-content">
               <ResourceLabel :resource="dimension" :language="selectedLanguage" />
               <div class="dimension-infos">
+                <b-tooltip v-if="dimension.scaleOfMeasure !== 'none'" :label="dimension.scaleOfMeasure" type="is-light" :delay="200" size="is-small">
+                  <b-icon :icon="getScaleOfMeasure(dimension.scaleOfMeasure).icon" />
+                </b-tooltip>
                 <b-tooltip v-if="getDescription(dimension)" :label="getDescription(dimension)" type="is-light" :delay="200" size="is-small">
                   <b-icon icon="comment-alt" pack="far" />
                 </b-tooltip>
@@ -168,6 +171,7 @@ import FiltersContinuous from '@/components/FiltersContinuous.vue'
 import FiltersTemporal from '@/components/FiltersTemporal.vue'
 import FiltersNominal from '@/components/FiltersNominal.vue'
 import ResourceLabel from '@/components/ResourceLabel.vue'
+import data from '@/data'
 
 export default {
   name: 'Designer',
@@ -187,6 +191,8 @@ export default {
 
   data () {
     return {
+      scaleOfMeasures: data.scaleOfMeasures,
+
       selectedLanguage: 'en',
       edited: null,
     }
@@ -228,6 +234,10 @@ export default {
       const description = (resource.description || []).find(({ language }) => language === this.selectedLanguage)
       return description ? description.value : ''
     },
+
+    getScaleOfMeasure (uri) {
+      return this.scaleOfMeasures.find((scale) => scale.uri === uri)
+    }
   },
 
   computed: {

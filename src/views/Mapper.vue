@@ -128,6 +128,7 @@
 
 <style scoped>
 .Mapper {
+  flex-grow: 1;
   overflow-y: hidden;
 
   display: flex;
@@ -135,6 +136,7 @@
 }
 
 .mapping {
+  flex-grow: 1;
   overflow-y: hidden;
   padding: 0 1rem;
   max-width: 100rem;

@@ -40,14 +40,14 @@
                   {{ source.label }}
                 </div>
                 <div class="level-right">
-                  <b-button :disabled="selectedColumns.length === 0">
+                  <b-button :disabled="selectedColumns[source.uri].length === 0">
                     Create table from selected columns
                   </b-button>
                 </div>
               </div>
             </div>
             <div v-for="column in source.columns" :key="column.uri" class="panel-block">
-              <b-checkbox v-model="selectedColumns" :native-value="column.uri">
+              <b-checkbox v-model="selectedColumns[source.uri]" :native-value="column.uri">
                 {{ column.uri }}
                 <span class="has-text-grey">
                   ({{ column.data.join(', ') }})
@@ -203,7 +203,7 @@ export default {
       cube: data.cube,
 
       columnFilter: 'all',
-      selectedColumns: [],
+      selectedColumns: Object.fromEntries(data.sources.map(({ uri }) => [uri, []])),
       showPreview: false,
     }
   },

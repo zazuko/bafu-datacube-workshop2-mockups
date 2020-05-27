@@ -147,6 +147,7 @@
 
 .mapping-sources {
   overflow-y: auto;
+  flex-grow: 1;
 }
 
 .source-mapping:not(:last-child) {

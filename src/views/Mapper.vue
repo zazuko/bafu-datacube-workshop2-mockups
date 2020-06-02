@@ -5,7 +5,12 @@
         <div class="column">
           <div class="level">
             <div class="level-left">
-              <h2 class="title is-6">Input sources</h2>
+              <div class="level-item">
+                <h2 class="title is-6">Input sources</h2>
+                <b-tooltip label="Adjust sources settings" type="is-light" :delay="200" size="is-small">
+                  <b-button tag="router-link" :to="{ name: 'SourcesSettings' }" type="is-white" class="has-text-grey" size="is-small" icon-left="cog" />
+                </b-tooltip>
+              </div>
             </div>
             <div class="level-right">
               <p class="level-item">Filter columns:</p>
@@ -243,7 +248,7 @@ export default {
             return table.source === source.uri && attribute.column === column.uri
           }))
       }, [])
-    }
+    },
   }
 }
 </script>

@@ -80,10 +80,10 @@
               <div class="panel-heading" :style="{ 'background-color': table.color }">
                 <div class="level">
                   <div class="level-left">
-                    {{ table.label }}
+                    <ResourceLabel :resource="table" :language="selectedLanguage" />
                   </div>
                   <div class="level-right actions">
-                    <ButtonEdit title="Edit table" />
+                    <ButtonEdit title="Edit table" @click="editTable(table)" />
                     <ButtonDelete title="Delete table" />
                   </div>
                 </div>
@@ -136,6 +136,11 @@
         </div>
       </div>
     </div>
+
+    <SidePane :isOpen="showSidePane" :title="sidePanelTitle" @close="onCloseSidePane">
+      <MapperTableForm v-if="edited && edited.type === 'table'" :value="edited" />
+      <p v-else>Unsupported type</p>
+    </SidePane>
   </div>
 </template>
 
@@ -221,11 +226,14 @@
 import CubeDesigner from '@/components/CubeDesigner.vue'
 import ButtonEdit from '@/components/ButtonEdit.vue'
 import ButtonDelete from '@/components/ButtonDelete.vue'
+import SidePane from '@/components/SidePane.vue'
+import MapperTableForm from '@/components/MapperTableForm.vue'
+import ResourceLabel from '@/components/ResourceLabel.vue'
 import data from '@/data'
 
 export default {
   name: 'Mapper',
-  components: { CubeDesigner, ButtonEdit, ButtonDelete },
+  components: { CubeDesigner, ButtonEdit, ButtonDelete, MapperTableForm, SidePane, ResourceLabel },
 
   data () {
     return {
@@ -233,9 +241,11 @@ export default {
       tables: data.tables,
       cube: data.cube,
 
+      selectedLanguage: 'en',
       columnFilter: 'all',
       selectedColumns: Object.fromEntries(data.sources.map(({ uri }) => [uri, []])),
       showPreview: false,
+      edited: null,
     }
   },
 
@@ -260,6 +270,37 @@ export default {
 
     getTable (uri) {
       return this.tables.find((table) => table.uri === uri)
+    },
+
+    onCloseSidePane () {
+      this.edited = null
+    },
+
+    editTable (table) {
+      this.edited = table
+    },
+
+    getLabel (resource) {
+      const label = resource.label.find(({ language }) => language === this.selectedLanguage)
+      return label ? label.value : ''
+    },
+  },
+
+  computed: {
+    showSidePane () {
+      return !!this.edited
+    },
+
+    sidePanelTitle () {
+      if (!this.edited) {
+        return ''
+      }
+
+      if (this.edited.type === 'table') {
+        return `Edit table ${this.getLabel(this.edited)}`
+      }
+
+      return ''
     }
   }
 }

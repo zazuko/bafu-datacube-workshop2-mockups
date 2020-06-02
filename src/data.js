@@ -37,9 +37,11 @@ export default {
 
   tables: [
     {
+      type: 'table',
       source: 'stations.csv',
       uri: 'Measurement',
-      label: 'Measurement',
+      label: [{ value: 'Measurement', language: 'en' }],
+      description: [],
       color: 'rgb(165, 214, 167)',
       identifierTemplate: 'Measurement/{station_id}/{pollutant_id}/{year}',
       attributes: [
@@ -51,9 +53,11 @@ export default {
       ]
     },
     {
+      type: 'table',
       source: 'stations.csv',
       uri: 'Station',
-      label: 'Station',
+      label: [{ value: 'Station', language: 'en' }],
+      description: [],
       color: 'rgb(129, 212, 250)',
       identifierTemplate: 'Station/{station_id}',
       attributes: [
@@ -62,9 +66,11 @@ export default {
       ]
     },
     {
+      type: 'table',
       source: 'pollutants.csv',
       uri: 'Pollutant',
-      label: 'Pollutant',
+      label: [{ value: 'Pollutant', language: 'en' }],
+      description: [],
       color: 'rgb(239, 154, 154)',
       identifierTemplate: 'Pollutant/{id}',
       attributes: [

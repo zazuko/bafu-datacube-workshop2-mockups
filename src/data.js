@@ -45,11 +45,46 @@ export default {
       color: 'rgb(165, 214, 167)',
       identifierTemplate: 'Measurement/{station_id}/{pollutant_id}/{year}',
       attributes: [
-        { uri: 'year', label: 'Year', column: 'year' },
-        { uri: 'measurement', label: 'Measurement', column: 'value' },
-        { uri: 'value_remark', label: 'Remark', column: 'value_remark' },
-        { uri: 'station', label: 'Station', column: 'station_id', linksTo: 'Station' },
-        { uri: 'pollutant', label: 'Pollutant', column: 'pollutant_id', linksTo: 'Pollutant' },
+        {
+          type: 'attribute',
+          uri: 'year',
+          label: [{ value: 'Year', language: 'en' }],
+          column: 'year',
+          property: 'year',
+          datatype: 'xsd:gYear',
+        },
+        {
+          type: 'attribute',
+          uri: 'measurement',
+          label: [{ value: 'Measurement', language: 'en' }],
+          column: 'value',
+          property: 'value',
+          datatype: 'xsd:decimal',
+        },
+        {
+          type: 'attribute',
+          uri: 'value_remark',
+          label: [{ value: 'Remark', language: 'en' }],
+          column: 'value_remark',
+          property: 'schema:comment',
+          datatype: 'xsd:string',
+        },
+        {
+          type: 'attribute',
+          uri: 'station',
+          label: [{ value: 'Station', language: 'en' }],
+          column: 'station_id',
+          linksTo: 'Station',
+          property: 'station',
+        },
+        {
+          type: 'attribute',
+          uri: 'pollutant',
+          label: [{ value: 'Pollutant', language: 'en' }],
+          column: 'pollutant_id',
+          linksTo: 'Pollutant',
+          property: 'pollutant',
+        },
       ]
     },
     {
@@ -61,8 +96,20 @@ export default {
       color: 'rgb(129, 212, 250)',
       identifierTemplate: 'Station/{station_id}',
       attributes: [
-        { uri: 'id', label: 'ID', column: 'station_id' },
-        { uri: 'label', label: 'Label', column: 'station_name_de' },
+        {
+          type: 'attribute',
+          uri: 'id',
+          label: [{ value: 'ID', language: 'en' }],
+          column: 'station_id',
+          property: 'schema:identifier',
+        },
+        {
+          type: 'attribute',
+          uri: 'label',
+          label: [{ value: 'Label', language: 'en' }],
+          column: 'station_name_de',
+          property: 'rdfs:label',
+        },
       ]
     },
     {
@@ -74,8 +121,20 @@ export default {
       color: 'rgb(239, 154, 154)',
       identifierTemplate: 'Pollutant/{id}',
       attributes: [
-        { uri: 'id', label: 'ID', column: 'pollutant_id' },
-        { uri: 'label', label: 'Label', column: 'pollutant_name_de' },
+        {
+          type: 'attribute',
+          uri: 'id',
+          label: [{ value: 'ID', language: 'en' }],
+          column: 'pollutant_id',
+          property: 'schema:identifier',
+        },
+        {
+          type: 'attribute',
+          uri: 'label',
+          label: [{ value: 'Label', language: 'en' }],
+          column: 'pollutant_name_de',
+          property: 'rdfs:label',
+        },
       ]
     },
   ],
@@ -203,5 +262,14 @@ export default {
     { uri: 'continuous', label: 'Continuous', icon: 'ruler-horizontal' },
     { uri: 'nominal', label: 'Nominal', icon: 'list' },
     { uri: 'temporal', label: 'Temporal', icon: 'clock' },
-  ]
+  ],
+
+  datatypes: [
+    { uri: 'xsd:string' },
+    { uri: 'xsd:integer' },
+    { uri: 'xsd:decimal' },
+    { uri: 'xsd:datetime' },
+    { uri: 'xsd:gYear' },
+    { uri: 'xsd:float' },
+  ],
 }

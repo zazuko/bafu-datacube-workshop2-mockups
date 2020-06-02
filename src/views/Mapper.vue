@@ -93,13 +93,13 @@
               </div>
               <div v-for="attribute in table.attributes" :key="attribute.uri" class="panel-block">
                 <span v-if="attribute.linksTo" class="tag is-rounded" :style="{ 'background-color': getTable(attribute.linksTo).color }">
-                  {{ attribute.label }}
+                  <ResourceLabel :resource="attribute" :language="selectedLanguage" />
                 </span>
                 <span v-else>
-                  {{ attribute.label }}
+                  <ResourceLabel :resource="attribute" :language="selectedLanguage" />
                 </span>
                 <div class="actions">
-                  <ButtonEdit title="Edit attribute" />
+                  <ButtonEdit title="Edit attribute" @click="editAttribute(attribute)" />
                   <ButtonDelete title="Delete attribute" />
                 </div>
               </div>
@@ -139,6 +139,7 @@
 
     <SidePane :isOpen="showSidePane" :title="sidePanelTitle" @close="onCloseSidePane">
       <MapperTableForm v-if="edited && edited.type === 'table'" :value="edited" />
+      <MapperAttributeForm v-if="edited && edited.type === 'attribute'" :value="edited" />
       <p v-else>Unsupported type</p>
     </SidePane>
   </div>
@@ -228,12 +229,21 @@ import ButtonEdit from '@/components/ButtonEdit.vue'
 import ButtonDelete from '@/components/ButtonDelete.vue'
 import SidePane from '@/components/SidePane.vue'
 import MapperTableForm from '@/components/MapperTableForm.vue'
+import MapperAttributeForm from '@/components/MapperAttributeForm.vue'
 import ResourceLabel from '@/components/ResourceLabel.vue'
 import data from '@/data'
 
 export default {
   name: 'Mapper',
-  components: { CubeDesigner, ButtonEdit, ButtonDelete, MapperTableForm, SidePane, ResourceLabel },
+  components: {
+    CubeDesigner,
+    ButtonEdit,
+    ButtonDelete,
+    MapperTableForm,
+    MapperAttributeForm,
+    SidePane,
+    ResourceLabel,
+  },
 
   data () {
     return {
@@ -280,6 +290,10 @@ export default {
       this.edited = table
     },
 
+    editAttribute (attribute) {
+      this.edited = attribute
+    },
+
     getLabel (resource) {
       const label = resource.label.find(({ language }) => language === this.selectedLanguage)
       return label ? label.value : ''
@@ -298,6 +312,10 @@ export default {
 
       if (this.edited.type === 'table') {
         return `Edit table ${this.getLabel(this.edited)}`
+      }
+
+      if (this.edited.type === 'attribute') {
+        return `Edit attribute ${this.getLabel(this.edited)}`
       }
 
       return ''

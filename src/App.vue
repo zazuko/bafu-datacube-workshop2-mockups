@@ -8,6 +8,9 @@
         <b-navbar-item tag="router-link" :to="{ name: 'Designer' }">
           Designer
         </b-navbar-item>
+        <b-navbar-item tag="router-link" :to="{ name: 'DimensionManager' }">
+          Dimension Manager
+        </b-navbar-item>
       </template>
     </b-navbar>
     <router-view />

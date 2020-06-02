@@ -250,6 +250,10 @@ export default {
     }
   },
 
+  managedDimensions: [
+    { uri: 'cantons', label: [{ value: 'Cantons', language: 'en' }] },
+  ],
+
   languages: [
     { label: 'en', code: 'en' },
     { label: 'fr', code: 'fr' },

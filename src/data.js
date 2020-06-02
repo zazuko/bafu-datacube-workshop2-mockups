@@ -41,12 +41,13 @@ export default {
       uri: 'Measurement',
       label: 'Measurement',
       color: 'rgb(165, 214, 167)',
+      identifierTemplate: 'Measurement/{station_id}/{pollutant_id}/{year}',
       attributes: [
         { uri: 'year', label: 'Year', column: 'year' },
         { uri: 'measurement', label: 'Measurement', column: 'value' },
         { uri: 'value_remark', label: 'Remark', column: 'value_remark' },
-        { uri: 'station', label: 'Station', column: 'station_id' },
-        { uri: 'pollutant', label: 'Pollutant', column: 'pollutant_id' },
+        { uri: 'station', label: 'Station', column: 'station_id', linksTo: 'Station' },
+        { uri: 'pollutant', label: 'Pollutant', column: 'pollutant_id', linksTo: 'Pollutant' },
       ]
     },
     {
@@ -54,8 +55,9 @@ export default {
       uri: 'Station',
       label: 'Station',
       color: 'rgb(129, 212, 250)',
+      identifierTemplate: 'Station/{station_id}',
       attributes: [
-        { uri: 'id', label: 'Identifier', column: 'station_id' },
+        { uri: 'id', label: 'ID', column: 'station_id' },
         { uri: 'label', label: 'Label', column: 'station_name_de' },
       ]
     },
@@ -64,8 +66,9 @@ export default {
       uri: 'Pollutant',
       label: 'Pollutant',
       color: 'rgb(239, 154, 154)',
+      identifierTemplate: 'Pollutant/{id}',
       attributes: [
-        { uri: 'id', label: 'Identifier', column: 'pollutant_id' },
+        { uri: 'id', label: 'ID', column: 'pollutant_id' },
         { uri: 'label', label: 'Label', column: 'pollutant_name_de' },
       ]
     },

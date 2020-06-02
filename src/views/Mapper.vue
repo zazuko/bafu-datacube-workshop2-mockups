@@ -88,8 +88,16 @@
                   </div>
                 </div>
               </div>
+              <div class="panel-block">
+                <span>Identifier template: <code>{{ table.identifierTemplate }}</code></span>
+              </div>
               <div v-for="attribute in table.attributes" :key="attribute.uri" class="panel-block">
-                {{ attribute.label }}
+                <span v-if="attribute.linksTo" class="tag is-rounded" :style="{ 'background-color': getTable(attribute.linksTo).color }">
+                  {{ attribute.label }}
+                </span>
+                <span v-else>
+                  {{ attribute.label }}
+                </span>
                 <div class="actions">
                   <ButtonEdit title="Edit attribute" />
                   <ButtonDelete title="Delete attribute" />
@@ -249,6 +257,10 @@ export default {
           }))
       }, [])
     },
+
+    getTable (uri) {
+      return this.tables.find((table) => table.uri === uri)
+    }
   }
 }
 </script>

@@ -36,6 +36,11 @@ const routes = [
         name: 'Designer',
         component: Designer
       },
+      {
+        path: 'sources-settings',
+        name: 'SourcesSettings',
+        component: SourcesSettings
+      },
     ],
   },
   {
@@ -48,11 +53,6 @@ const routes = [
     name: 'ManagedDimension',
     component: ManagedDimension,
   },
-  {
-    path: '/sources-settings',
-    name: 'SourcesSettings',
-    component: SourcesSettings
-  }
 ]
 
 const router = new VueRouter({

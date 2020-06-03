@@ -3,7 +3,7 @@
     <b-navbar shadow>
       <template slot="brand">
         <b-navbar-item>
-          <img src="/zazuko-logo.svg" alt="Zazuko" class="logo">
+          <img src="zazuko-logo.svg" alt="Zazuko" class="logo">
         </b-navbar-item>
       </template>
       <template slot="start">

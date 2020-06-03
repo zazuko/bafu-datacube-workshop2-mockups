@@ -23,7 +23,7 @@
                   <b-icon icon="comment-alt" pack="far" />
                 </b-tooltip>
                 <b-tooltip v-if="dimension.isManaged" label="Linked to managed dimension" type="is-light" :delay="200" size="is-small">
-                  <b-icon icon="external-link-square-alt" />
+                  <b-button icon-left="external-link-square-alt" size="is-small" type="is-white is-icon" @click="editMapping(dimension.mappedTo)" />
                 </b-tooltip>
               </div>
             </div>
@@ -64,8 +64,9 @@
 
     <SidePane :isOpen="showSidePane" :title="sidePanelTitle" @close="onCloseSidePane">
       <DesignerCubeForm v-if="edited && edited.type === 'cube'" :value="edited" />
-      <DesignerDimensionForm v-else-if="edited && edited.type === 'dimension'" :value="edited" />
+      <DesignerDimensionForm v-else-if="edited && edited.type === 'dimension'" :value="edited" @editMapping="editMapping" />
       <DesignerResourceForm v-else-if="edited && edited.type === 'resource'" :value="edited" />
+      <DesignerMappingForm v-else-if="edited && edited.type === 'mapping'" :value="edited" :cube="cube" />
       <p v-else>Unsupported type</p>
     </SidePane>
   </div>
@@ -131,6 +132,7 @@ tbody .cell-content {
 
 .dimension-infos {
   display: flex;
+  align-items: center;
   /* justify-content: flex-end; */
 }
 
@@ -138,6 +140,10 @@ tbody .cell-content {
   height: 1rem;
   width: 1rem;
   font-size: 0.5rem;
+}
+
+.dimension-infos .button.is-icon {
+  padding: 0;
 }
 
 .dimension-actions {
@@ -156,6 +162,7 @@ import SidePane from '@/components/SidePane.vue'
 import DesignerCubeForm from '@/components/DesignerCubeForm.vue'
 import DesignerDimensionForm from '@/components/DesignerDimensionForm.vue'
 import DesignerResourceForm from '@/components/DesignerResourceForm.vue'
+import DesignerMappingForm from '@/components/DesignerMappingForm.vue'
 import InputLanguage from '@/components/InputLanguage.vue'
 import FiltersContinuous from '@/components/FiltersContinuous.vue'
 import FiltersTemporal from '@/components/FiltersTemporal.vue'
@@ -172,6 +179,7 @@ export default {
     DesignerCubeForm,
     DesignerDimensionForm,
     DesignerResourceForm,
+    DesignerMappingForm,
     DesignerDimensionValue,
     InputLanguage,
     FiltersContinuous,
@@ -202,6 +210,10 @@ export default {
 
     editResource (resource) {
       this.edited = resource
+    },
+
+    editMapping (mapping) {
+      this.edited = mapping
     },
 
     onCloseSidePane () {

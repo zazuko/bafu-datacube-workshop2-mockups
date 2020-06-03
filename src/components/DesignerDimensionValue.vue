@@ -46,9 +46,9 @@ export default {
       if (this.dimension.isManaged) {
         const mapping = this.dimension.mappedTo
         const managedDimension = this.managedDimensions.find(({ uri }) => uri === mapping.managedDimension)
-        const matchingMapping = mapping.mapping.find((mappedValue) => mappedValue.value === value.value)
-        return matchingMapping
-          ? managedDimension.resources.find(({ uri }) => uri === matchingMapping.target)
+        const mappedResource = mapping.mapping[value.value]
+        return mappedResource
+          ? managedDimension.resources.find(({ uri }) => uri === mappedResource)
           : value
       }
 

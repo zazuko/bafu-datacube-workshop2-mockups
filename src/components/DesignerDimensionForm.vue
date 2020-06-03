@@ -8,7 +8,7 @@
     </b-field>
 
     <b-field label="Special actions" v-if="value.scaleOfMeasure === 'nominal' && value.isManaged">
-      <b-button icon-left="link" type="is-info">
+      <b-button icon-left="link" type="is-info" @click="$emit('editMapping', value.mappedTo)">
         Map to managed dimension
       </b-button>
     </b-field>

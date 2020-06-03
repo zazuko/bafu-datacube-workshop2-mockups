@@ -182,10 +182,11 @@ export default {
         isManaged: true,
         mappedTo: {
           type: 'mapping',
+          dimension: 'canton', // Hack to be able to get all the distinct values
           managedDimension: 'cantons',
-          mapping: [
-            { value: 'AG', target: 'AG' },
-          ],
+          mapping: {
+            AG: 'AG',
+          },
         },
       },
       {

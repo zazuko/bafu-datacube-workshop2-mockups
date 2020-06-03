@@ -149,6 +149,7 @@ export default {
 
   cube: {
     type: 'cube',
+    uri: 'quality-of-air-ch',
     label: [{ value: 'Quality of air in Switzerland', language: 'en' }],
     description: [],
     publishers: [{ value: 'Bundesamt für Umwelt BAFU', language: 'de' }],

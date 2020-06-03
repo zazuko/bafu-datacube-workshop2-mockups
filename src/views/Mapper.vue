@@ -1,7 +1,11 @@
 <template>
   <div class="Mapper">
-    <div class="mapping">
-      <header class="columns">
+    <div class="mapping page">
+      <h2 class="title is-4">
+        <ResourceLabel :resource="cube" :language="selectedLanguage" />
+      </h2>
+
+      <div class="columns">
         <div class="column">
           <div class="level">
             <div class="level-left">
@@ -34,7 +38,7 @@
         <div class="column">
           <h2 class="title is-6">Output tables</h2>
         </div>
-      </header>
+      </div>
 
       <div class="mapping-sources">
         <div class="source-mapping columns" v-for="source in sources" :key="source.uri">
@@ -157,7 +161,7 @@
 .mapping {
   flex-grow: 1;
   overflow-y: hidden;
-  padding: 0 1rem;
+  /* padding: 0 1rem; */
   max-width: 100rem;
 
   display: flex;

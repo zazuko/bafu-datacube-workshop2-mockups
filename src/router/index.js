@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Cubes from '../views/Cubes.vue'
+import Cube from '../views/Cube.vue'
 import Mapper from '../views/Mapper.vue'
 import Designer from '../views/Designer.vue'
 import DimensionManager from '../views/DimensionManager.vue'
@@ -12,17 +14,29 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    redirect: { name: 'Mapper' }
+    redirect: { name: 'Cubes' }
   },
   {
-    path: '/mapper',
-    name: 'Mapper',
-    component: Mapper
+    path: '/cubes',
+    name: 'Cubes',
+    component: Cubes,
   },
   {
-    path: '/designer',
-    name: 'Designer',
-    component: Designer
+    path: '/cubes/:uri',
+    name: 'Cube',
+    component: Cube,
+    children: [
+      {
+        path: 'mapper',
+        name: 'Mapper',
+        component: Mapper
+      },
+      {
+        path: 'designer',
+        name: 'Designer',
+        component: Designer
+      },
+    ],
   },
   {
     path: '/dimension-manager',

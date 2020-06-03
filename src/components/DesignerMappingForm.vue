@@ -23,7 +23,7 @@
               <b-dropdown v-model="value.mapping[distinctValue]">
                 <button class="button" type="button" slot="trigger">
                   <template>
-                    <span>{{ value.mapping[distinctValue] }}</span>
+                    <ResourceTag :resource="getResource(value.mapping[distinctValue])" :language="language" :color="managedDimension.color" />
                   </template>
                   <b-icon icon="chevron-down" size="is-small" type="is-primary"></b-icon>
                 </button>
@@ -71,6 +71,12 @@ export default {
   computed: {
     managedDimension () {
       return this.managedDimensions.find(({ uri }) => this.value.managedDimension === uri)
+    }
+  },
+
+  methods: {
+    getResource (uri) {
+      return this.managedDimension.resources.find((resource) => resource.uri === uri)
     }
   }
 }

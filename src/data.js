@@ -71,6 +71,14 @@ export default {
         },
         {
           type: 'attribute',
+          uri: 'station-canton',
+          label: [{ value: 'Canton', language: 'en' }],
+          column: 'station_canton',
+          property: 'station-canton',
+          datatype: 'xsd:string',
+        },
+        {
+          type: 'attribute',
           uri: 'station',
           label: [{ value: 'Station', language: 'en' }],
           column: 'station_id',
@@ -163,7 +171,16 @@ export default {
         uri: 'pollutant',
         scaleOfMeasure: 'nominal',
         color: 'rgb(239, 154, 154)',
+      },
+      {
+        type: 'dimension',
+        label: [{ value: 'Canton', language: 'en' }],
+        description: [],
+        uri: 'canton',
+        scaleOfMeasure: 'nominal',
+        color: 'rgb(255, 245, 157)',
         isManaged: true,
+        linksTo: 'cantons',
       },
       {
         type: 'dimension',
@@ -191,6 +208,7 @@ export default {
       {
         station: { value: 'Basel' },
         pollutant: { value: 'Stickstoffdioxid' },
+        canton: { value: 'BE' },
         year: { value: '2001' },
         measurement: { value: '12.1', unit: 'µg/m³' },
         remark: { value: '' },
@@ -198,6 +216,7 @@ export default {
       {
         station: { value: 'Basel' },
         pollutant: { value: 'Stickstoffdioxid' },
+        canton: { value: 'BE' },
         year: { value: '2002' },
         measurement: { value: '24.2', unit: 'µg/m³' },
         remark: { value: 'A textual remark' },
@@ -205,6 +224,7 @@ export default {
       {
         station: { value: 'Basel' },
         pollutant: { value: 'Stickstoffdioxid' },
+        canton: { value: 'BE' },
         year: { value: '2003' },
         measurement: { value: '5.1', unit: 'µg/m³' },
         remark: { value: '' },
@@ -212,6 +232,7 @@ export default {
       {
         station: { value: 'Aarau' },
         pollutant: { value: 'Stickstoffdioxid' },
+        canton: { value: 'AG' },
         year: { value: '2001' },
         measurement: { value: '3.1', unit: 'µg/m³' },
         remark: { value: '' },
@@ -219,6 +240,7 @@ export default {
       {
         station: { value: 'Aarau' },
         pollutant: { value: 'Stickstoffdioxid' },
+        canton: { value: 'AG' },
         year: { value: '2002' },
         measurement: { value: '15.1', unit: 'µg/m³' },
         remark: { value: '' },
@@ -226,6 +248,7 @@ export default {
       {
         station: { value: 'Aarau' },
         pollutant: { value: 'Stickstoffdioxid' },
+        canton: { value: 'AG' },
         year: { value: '2003' },
         measurement: { value: '45.1', unit: 'µg/m³' },
         remark: { value: '' },
@@ -257,9 +280,30 @@ export default {
       label: [{ value: 'Cantons', language: 'en' }],
       properties: ['rdfs:label', 'schema:identifier'],
       resources: [
-        { uri: 'fribourg', 'rdfs:label': [{ value: 'Fribourg', language: 'en' }], 'schema:identifier': [{ value: 'FR' }] },
-        { uri: 'zuerich', 'rdfs:label': [{ value: 'Zürich', language: 'en' }], 'schema:identifier': [{ value: 'ZU' }] },
-        { uri: 'bern', 'rdfs:label': [{ value: 'Bern', language: 'en' }], 'schema:identifier': [{ value: 'BE' }] },
+        {
+          type: 'resource',
+          uri: 'FR',
+          'rdfs:label': [{ value: 'Fribourg', language: 'en' }],
+          'schema:identifier': [{ value: 'FR' }],
+        },
+        {
+          type: 'resource',
+          uri: 'ZU',
+          'rdfs:label': [{ value: 'Zürich', language: 'en' }],
+          'schema:identifier': [{ value: 'ZU' }],
+        },
+        {
+          type: 'resource',
+          uri: 'BE',
+          'rdfs:label': [{ value: 'Bern', language: 'en' }],
+          'schema:identifier': [{ value: 'BE' }],
+        },
+        {
+          type: 'resource',
+          uri: 'AG',
+          'rdfs:label': [{ value: 'Aargau', language: 'en' }],
+          'schema:identifier': [{ value: 'AG' }],
+        },
       ]
     },
   ],

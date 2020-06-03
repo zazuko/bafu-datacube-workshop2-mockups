@@ -1,11 +1,11 @@
 <template>
   <b-field :label="label" :addons="false">
     <b-field v-for="(subValue, index) in value" :key="index">
-      <b-input v-model="subValue.value" class="is-expanded" :type="inputType" />
-      <InputLanguage v-model="subValue.language" v-if="showLanguage" />
-      <b-button icon-left="times" title="Remove value" @click="removeValue(index)" />
+      <b-input v-model="subValue.value" class="is-expanded" :type="inputType" :disabled="disabled" />
+      <InputLanguage v-model="subValue.language" v-if="showLanguage" :disabled="disabled" />
+      <b-button icon-left="times" title="Remove value" @click="removeValue(index)" :disabled="disabled" />
     </b-field>
-    <b-button icon-left="plus" title="Add a value" type="is-white" @click="addValue" />
+    <b-button icon-left="plus" title="Add a value" type="is-white" @click="addValue" :disabled="disabled" />
   </b-field>
 </template>
 
@@ -14,7 +14,7 @@ import InputLanguage from './InputLanguage.vue'
 
 export default {
   name: 'InputMultiValue',
-  props: ['value', 'label', 'input-type', 'disable-language'],
+  props: ['value', 'label', 'input-type', 'disable-language', 'disabled'],
   components: { InputLanguage },
 
   data () {

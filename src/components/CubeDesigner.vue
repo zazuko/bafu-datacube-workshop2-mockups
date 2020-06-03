@@ -52,10 +52,9 @@
               <b-button
                 v-if="dimension.scaleOfMeasure === 'nominal'"
                 @click="editResource(getValue(row, dimension))"
-                title="Edit resource"
+                title="View resource"
                 :rounded="true"
                 size="is-small"
-                icon-left="pen"
                 :style="{ 'background-color': dimension.color}"
               >
                 <ResourceLabel :resource="getValue(row, dimension)" :language="selectedLanguage" />
@@ -192,6 +191,7 @@ export default {
   data () {
     return {
       scaleOfMeasures: data.scaleOfMeasures,
+      managedDimensions: data.managedDimensions,
 
       selectedLanguage: 'en',
       edited: null,
@@ -218,6 +218,11 @@ export default {
     getValue (row, dimension) {
       const value = row[dimension.uri]
 
+      if (dimension.isManaged) {
+        const managedDimension = this.managedDimensions.find(({ uri }) => uri === dimension.linksTo)
+        return managedDimension.resources.find(({ uri }) => uri === value.value)
+      }
+
       if (dimension.scaleOfMeasure === 'nominal') {
         return this.cube.resources[value.value]
       }
@@ -226,7 +231,8 @@ export default {
     },
 
     getLabel (resource) {
-      const label = resource.label.find(({ language }) => language === this.selectedLanguage)
+      const labels = resource.label || resource['rdfs:label']
+      const label = labels.find(({ language }) => language === this.selectedLanguage)
       return label ? label.value : ''
     },
 
@@ -259,7 +265,7 @@ export default {
       }
 
       if (this.edited.type === 'resource') {
-        return `Edit resource ${this.getLabel(this.edited)}`
+        return `View resource ${this.getLabel(this.edited)}`
       }
 
       return ''

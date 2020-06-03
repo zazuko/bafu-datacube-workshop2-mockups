@@ -7,7 +7,7 @@
       <InputScaleOfMeasure v-model="value.scaleOfMeasure" />
     </b-field>
 
-    <b-field label="Special actions" v-if="value.scaleOfMeasure === 'nominal'">
+    <b-field label="Special actions" v-if="value.scaleOfMeasure === 'nominal' && value.isManaged">
       <b-button icon-left="link" type="is-info">
         Map to managed dimension
       </b-button>

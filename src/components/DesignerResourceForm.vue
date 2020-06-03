@@ -5,6 +5,7 @@
       :key="property"
       :label="property"
       v-model="value[property]"
+      disabled
     />
   </form>
 </template>
@@ -19,7 +20,7 @@ export default {
 
   computed: {
     properties () {
-      return Object.keys(this.value).filter((property) => property !== 'type')
+      return Object.keys(this.value).filter((property) => !['type', 'uri'].includes(property))
     }
   }
 }

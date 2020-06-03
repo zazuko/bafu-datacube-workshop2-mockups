@@ -228,6 +228,7 @@
 </style>
 
 <script>
+import { nanoid } from 'nanoid'
 import CubeDesigner from '@/components/CubeDesigner.vue'
 import Button from '@/components/Button.vue'
 import ButtonEdit from '@/components/ButtonEdit.vue'
@@ -301,7 +302,7 @@ export default {
     },
 
     addAttribute (table) {
-      const attribute = { type: 'attribute', uri: 'test', label: [] }
+      const attribute = { type: 'attribute', uri: nanoid(), label: [] }
       table.attributes.push(attribute)
       this.edited = attribute
     },

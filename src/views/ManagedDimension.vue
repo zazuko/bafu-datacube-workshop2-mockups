@@ -39,7 +39,11 @@
         <b-table-column>
           <template slot="header"></template>
           <ButtonEdit title="Edit resource" @click="editResource(props.row)" />
+          <ButtonDelete title="Delete resource" @click="deleteResource(props.row)" />
         </b-table-column>
+      </template>
+      <template slot="footer">
+        <b-button icon-left="plus" size="is-small" @click="addResource">Add a resource</b-button>
       </template>
     </b-table>
   </section>
@@ -51,10 +55,11 @@ import ResourceLabel from '@/components/ResourceLabel'
 import ResourceTag from '@/components/ResourceTag'
 import InputLanguage from '@/components/InputLanguage'
 import ButtonEdit from '@/components/ButtonEdit'
+import ButtonDelete from '@/components/ButtonDelete'
 
 export default {
   name: 'ManagedDimension',
-  components: { ResourceLabel, ResourceTag, InputLanguage, ButtonEdit },
+  components: { ResourceLabel, ResourceTag, InputLanguage, ButtonEdit, ButtonDelete },
 
   data () {
     const dimensionURI = this.$route.params.uri
@@ -75,7 +80,21 @@ export default {
   methods: {
     editResource (resource) {
       this.$buefy.toast.open({
-        type: 'is-info',
+        type: 'is-warning',
+        message: 'Nothing here yet',
+      })
+    },
+
+    deleteResource (resource) {
+      this.$buefy.toast.open({
+        type: 'is-warning',
+        message: 'Nothing here yet',
+      })
+    },
+
+    addResource () {
+      this.$buefy.toast.open({
+        type: 'is-warning',
         message: 'Nothing here yet',
       })
     },

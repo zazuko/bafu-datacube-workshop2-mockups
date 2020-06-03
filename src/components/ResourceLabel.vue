@@ -12,7 +12,8 @@ export default {
 
   computed: {
     label () {
-      const label = this.resource.label.find(({ language }) => language === this.language)
+      const labels = this.resource.label || this.resource['rdfs:label']
+      const label = labels.find(({ language }) => language === this.language)
       return label ? label.value : ''
     }
   },

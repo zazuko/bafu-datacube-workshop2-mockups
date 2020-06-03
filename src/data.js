@@ -251,7 +251,17 @@ export default {
   },
 
   managedDimensions: [
-    { uri: 'cantons', label: [{ value: 'Cantons', language: 'en' }] },
+    {
+      uri: 'cantons',
+      color: 'rgb(255, 245, 157)',
+      label: [{ value: 'Cantons', language: 'en' }],
+      properties: ['rdfs:label', 'schema:identifier'],
+      resources: [
+        { uri: 'fribourg', 'rdfs:label': [{ value: 'Fribourg', language: 'en' }], 'schema:identifier': [{ value: 'FR' }] },
+        { uri: 'zuerich', 'rdfs:label': [{ value: 'Zürich', language: 'en' }], 'schema:identifier': [{ value: 'ZU' }] },
+        { uri: 'bern', 'rdfs:label': [{ value: 'Bern', language: 'en' }], 'schema:identifier': [{ value: 'BE' }] },
+      ]
+    },
   ],
 
   languages: [

@@ -49,22 +49,13 @@
         <tr v-for="(row, index) in cube.data" :key="index">
           <td v-for="dimension in cube.dimensions" :key="dimension.uri" :class="'scale-' + dimension.scaleOfMeasure">
             <div class="cell-content">
-              <b-button
-                v-if="dimension.scaleOfMeasure === 'nominal'"
-                @click="editResource(getValue(row, dimension))"
-                title="View resource"
-                :rounded="true"
-                size="is-small"
-                :style="{ 'background-color': dimension.color}"
-              >
-                <ResourceLabel :resource="getValue(row, dimension)" :language="selectedLanguage" />
-              </b-button>
-              <span v-else class="value">
-                {{ getValue(row, dimension).value }}
-                <small v-if="getValue(row, dimension).unit" class="unit has-text-grey">
-                  {{ getValue(row, dimension).unit }}
-                </small>
-              </span>
+              <DesignerDimensionValue
+                :resource="row"
+                :dimension="dimension"
+                :language="selectedLanguage"
+                :cube="cube"
+                @editResource="editResource"
+              />
             </div>
           </td>
         </tr>
@@ -170,6 +161,7 @@ import FiltersContinuous from '@/components/FiltersContinuous.vue'
 import FiltersTemporal from '@/components/FiltersTemporal.vue'
 import FiltersNominal from '@/components/FiltersNominal.vue'
 import ResourceLabel from '@/components/ResourceLabel.vue'
+import DesignerDimensionValue from '@/components/DesignerDimensionValue.vue'
 import data from '@/data'
 
 export default {
@@ -180,6 +172,7 @@ export default {
     DesignerCubeForm,
     DesignerDimensionForm,
     DesignerResourceForm,
+    DesignerDimensionValue,
     InputLanguage,
     FiltersContinuous,
     FiltersTemporal,
@@ -213,21 +206,6 @@ export default {
 
     onCloseSidePane () {
       this.edited = null
-    },
-
-    getValue (row, dimension) {
-      const value = row[dimension.uri]
-
-      if (dimension.isManaged) {
-        const managedDimension = this.managedDimensions.find(({ uri }) => uri === dimension.linksTo)
-        return managedDimension.resources.find(({ uri }) => uri === value.value)
-      }
-
-      if (dimension.scaleOfMeasure === 'nominal') {
-        return this.cube.resources[value.value]
-      }
-
-      return value
     },
 
     getLabel (resource) {
@@ -266,6 +244,10 @@ export default {
 
       if (this.edited.type === 'resource') {
         return `View resource ${this.getLabel(this.edited)}`
+      }
+
+      if (this.edited.type === 'mapping') {
+        return 'Edit managed dimension mapping'
       }
 
       return ''

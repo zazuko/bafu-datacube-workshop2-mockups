@@ -180,7 +180,13 @@ export default {
         scaleOfMeasure: 'nominal',
         color: 'rgb(255, 245, 157)',
         isManaged: true,
-        linksTo: 'cantons',
+        mappedTo: {
+          type: 'mapping',
+          managedDimension: 'cantons',
+          mapping: [
+            { value: 'AG', target: 'AG' },
+          ],
+        },
       },
       {
         type: 'dimension',
@@ -270,7 +276,7 @@ export default {
         label: [{ value: 'Nitrogen dioxide', language: 'en' }, { value: 'Stickstoffdioxid', language: 'de' }],
         id: [{ value: 13344 }],
       },
-    }
+    },
   },
 
   managedDimensions: [

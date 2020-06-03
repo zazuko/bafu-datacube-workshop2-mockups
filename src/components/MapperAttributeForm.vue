@@ -2,7 +2,9 @@
   <form class="form">
     <b-field label="Column">
       <b-select v-model="value.column">
-        <option :value="value.column">{{ value.column }}</option>
+        <option v-for="column in source.columns" :key="column.uri" :value="column.uri">
+          {{ column.uri }}
+        </option>
       </b-select>
     </b-field>
 
@@ -57,7 +59,11 @@ export default {
   props: ['value'],
 
   data () {
+    const table = data.tables.find((table) => table.attributes.includes(this.value))
+    const source = data.sources.find((source) => source.uri === table.source)
+
     return {
+      source,
       tables: data.tables,
       datatypes: data.datatypes,
     }

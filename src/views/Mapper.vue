@@ -108,7 +108,7 @@
                 </div>
               </div>
               <div class="panel-block">
-                <b-button icon-left="plus" />
+                <Button icon="plus" title="Add attribute" @click="addAttribute(table)" />
               </div>
             </div>
             <b-field>
@@ -229,6 +229,7 @@
 
 <script>
 import CubeDesigner from '@/components/CubeDesigner.vue'
+import Button from '@/components/Button.vue'
 import ButtonEdit from '@/components/ButtonEdit.vue'
 import ButtonDelete from '@/components/ButtonDelete.vue'
 import SidePane from '@/components/SidePane.vue'
@@ -241,6 +242,7 @@ export default {
   name: 'Mapper',
   components: {
     CubeDesigner,
+    Button,
     ButtonEdit,
     ButtonDelete,
     MapperTableForm,
@@ -295,6 +297,12 @@ export default {
     },
 
     editAttribute (attribute) {
+      this.edited = attribute
+    },
+
+    addAttribute (table) {
+      const attribute = { type: 'attribute', uri: 'test', label: [] }
+      table.attributes.push(attribute)
       this.edited = attribute
     },
 

@@ -143,7 +143,7 @@
 
     <SidePane :isOpen="showSidePane" :title="sidePanelTitle" @close="onCloseSidePane">
       <MapperTableForm v-if="edited && edited.type === 'table'" :value="edited" />
-      <MapperAttributeForm v-if="edited && edited.type === 'attribute'" :value="edited" />
+      <MapperAttributeForm v-else-if="edited && edited.type === 'attribute'" :value="edited" />
       <p v-else>Unsupported type</p>
     </SidePane>
   </div>

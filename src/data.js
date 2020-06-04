@@ -285,7 +285,7 @@ export default {
     {
       uri: 'cantons',
       color: 'rgb(255, 245, 157)',
-      label: [{ value: 'Cantons', language: 'en' }],
+      label: [{ value: 'Swiss Cantons', language: 'en' }],
       properties: ['rdfs:label', 'schema:identifier'],
       resources: [
         {
@@ -314,6 +314,18 @@ export default {
         },
       ]
     },
+    {
+      uri: 'municipalities',
+      color: '',
+      label: [{ value: 'Swiss Municipalities', language: 'en' }],
+      resources: [],
+    },
+    {
+      uri: 'languages',
+      color: '',
+      label: [{ value: 'Languages', language: 'en' }],
+      resources: [],
+    }
   ],
 
   languages: [

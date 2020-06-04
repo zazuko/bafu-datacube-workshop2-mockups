@@ -20,6 +20,12 @@
   </section>
 </template>
 
+<style scoped>
+.section {
+  max-width: 40rem;
+}
+</style>
+
 <script>
 import ResourceLabel from '@/components/ResourceLabel'
 import data from '@/data'

@@ -8,9 +8,21 @@
       >
         <ResourceLabel :resource="cube" :language="language" />
       </router-link>
+      <div class="panel-block">
+        Food pricing
+      </div>
+      <div class="panel-block">
+        Electricity
+      </div>
     </div>
   </section>
 </template>
+
+<style scoped>
+.section {
+  max-width: 40rem;
+}
+</style>
 
 <script>
 import ResourceLabel from '@/components/ResourceLabel'

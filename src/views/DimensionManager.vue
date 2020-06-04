@@ -17,6 +17,7 @@
         <p>You don't have any dimensions yet.</p>
       </div>
     </div>
+    <b-button icon-left="plus">Add managed dimension</b-button>
   </section>
 </template>
 

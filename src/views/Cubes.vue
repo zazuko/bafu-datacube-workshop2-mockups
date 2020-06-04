@@ -15,6 +15,7 @@
         Electricity
       </div>
     </div>
+    <b-button icon-left="plus">Add cube</b-button>
   </section>
 </template>
 

@@ -321,9 +321,9 @@ export default {
       resources: [],
     },
     {
-      uri: 'languages',
+      uri: 'chemical-elements',
       color: '',
-      label: [{ value: 'Languages', language: 'en' }],
+      label: [{ value: 'Chemical elements', language: 'en' }],
       resources: [],
     }
   ],

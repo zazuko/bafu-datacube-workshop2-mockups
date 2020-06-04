@@ -50,7 +50,9 @@
       "parser": "babel-eslint"
     },
     "rules": {
-      "comma-dangle": "off"
+      "comma-dangle": "off",
+      "vue/no-unused-components": "warn",
+      "vue/no-unused-vars": "warn"
     }
   },
   "browserslist": [

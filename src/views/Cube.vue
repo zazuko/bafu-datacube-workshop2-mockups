@@ -12,6 +12,11 @@
             <a :href="href">Designer</a>
           </li>
         </router-link>
+        <router-link :to="{ name: 'Job' }" v-slot="{ href,  isActive }">
+          <li :class="{ 'is-active': isActive }">
+            <a :href="href">Pipeline</a>
+          </li>
+        </router-link>
       </ul>
     </div>
 

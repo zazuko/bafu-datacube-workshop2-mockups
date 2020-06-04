@@ -7,6 +7,7 @@ import Designer from '../views/Designer.vue'
 import DimensionManager from '../views/DimensionManager.vue'
 import ManagedDimension from '../views/ManagedDimension.vue'
 import SourcesSettings from '../views/SourcesSettings.vue'
+import Job from '../views/Job.vue'
 
 Vue.use(VueRouter)
 
@@ -40,6 +41,11 @@ const routes = [
         path: 'sources-settings',
         name: 'SourcesSettings',
         component: SourcesSettings
+      },
+      {
+        path: 'job',
+        name: 'Job',
+        component: Job
       },
     ],
   },

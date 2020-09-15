@@ -36,7 +36,7 @@
           <p class="has-text-centered"><b-icon icon="arrow-right" size="is-small" /></p>
         </div>
         <div class="column">
-          <h2 class="title is-6">Output tables</h2>
+          <h2 class="title is-6">Output resources</h2>
         </div>
       </div>
 
@@ -51,7 +51,7 @@
                   </div>
                   <div class="level-right">
                     <b-button :disabled="selectedColumns[source.uri].length === 0">
-                      Create table from selected columns
+                      Create resource from selected columns
                     </b-button>
                   </div>
                 </div>
@@ -84,11 +84,12 @@
               <div class="panel-heading" :style="{ 'background-color': table.color }">
                 <div class="level">
                   <div class="level-left">
-                    <ResourceLabel :resource="table" :language="selectedLanguage" />
+                    <ResourceLabel :resource="table" :language="selectedLanguage" class="level-item" />
+                    <b-icon v-if="table.isObservation" icon="eye" size="is-small" class="level-item" title="Observation resource" />
                   </div>
                   <div class="level-right actions">
-                    <ButtonEdit title="Edit table" @click="editTable(table)" />
-                    <ButtonDelete title="Delete table" />
+                    <ButtonEdit title="Edit resource" @click="editTable(table)" />
+                    <ButtonDelete title="Delete resource" />
                   </div>
                 </div>
               </div>
@@ -103,17 +104,17 @@
                   <ResourceLabel :resource="attribute" :language="selectedLanguage" />
                 </span>
                 <div class="actions">
-                  <ButtonEdit title="Edit attribute" @click="editAttribute(attribute)" />
-                  <ButtonDelete title="Delete attribute" />
+                  <ButtonEdit title="Edit property" @click="editAttribute(attribute)" />
+                  <ButtonDelete title="Delete property" />
                 </div>
               </div>
               <div class="panel-block">
-                <Button icon="plus" title="Add attribute" @click="addAttribute(table)" />
+                <Button icon="plus" title="Add property" @click="addAttribute(table)" />
               </div>
             </div>
             <b-field>
               <b-button icon-left="plus">
-                Add table
+                Add resource
               </b-button>
             </b-field>
           </div>
@@ -324,11 +325,11 @@ export default {
       }
 
       if (this.edited.type === 'table') {
-        return `Edit table ${this.getLabel(this.edited)}`
+        return `Edit resource ${this.getLabel(this.edited)}`
       }
 
       if (this.edited.type === 'attribute') {
-        return `Edit attribute ${this.getLabel(this.edited)}`
+        return `Edit property ${this.getLabel(this.edited)}`
       }
 
       return ''

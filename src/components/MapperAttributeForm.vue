@@ -8,8 +8,12 @@
       </b-select>
     </b-field>
 
-    <b-field label="Property">
+    <b-field label="Property URI">
       <b-input v-model="value.property" />
+    </b-field>
+
+    <b-field label="Is dimension?">
+      <b-checkbox v-model="value.isDimension"></b-checkbox>
     </b-field>
 
     <b-field label="Data type" :addons="false">

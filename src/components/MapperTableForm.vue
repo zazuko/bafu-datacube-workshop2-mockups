@@ -1,5 +1,8 @@
 <template>
   <form class="form">
+    <b-field label="Is Observation resource?">
+      <b-checkbox v-model="value.isObservation"></b-checkbox>
+    </b-field>
     <InputMultiValue label="Label" v-model="value.label" />
     <b-field label="Identifier template">
       <b-input v-model="value.identifierTemplate" />

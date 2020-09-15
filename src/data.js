@@ -37,13 +37,14 @@ export default {
 
   tables: [
     {
+      isObservation: true,
       type: 'table',
       source: 'stations.csv',
       uri: 'Measurement',
-      label: [{ value: 'Measurement', language: 'en' }],
+      label: [{ value: 'Observation', language: 'en' }],
       description: [],
       color: 'rgb(165, 214, 167)',
-      identifierTemplate: 'Measurement/{station_id}/{pollutant_id}/{year}',
+      identifierTemplate: 'Observation/{station_id}/{pollutant_id}/{year}',
       attributes: [
         {
           type: 'attribute',
@@ -52,6 +53,7 @@ export default {
           column: 'year',
           property: 'year',
           datatype: 'xsd:gYear',
+          isDimension: true,
         },
         {
           type: 'attribute',
@@ -60,6 +62,7 @@ export default {
           column: 'value',
           property: 'value',
           datatype: 'xsd:decimal',
+          isDimension: true,
         },
         {
           type: 'attribute',
@@ -68,6 +71,7 @@ export default {
           column: 'value_remark',
           property: 'schema:comment',
           datatype: 'xsd:string',
+          isDimension: false,
         },
         {
           type: 'attribute',
@@ -76,6 +80,7 @@ export default {
           column: 'station_canton',
           property: 'station-canton',
           datatype: 'xsd:string',
+          isDimension: true,
         },
         {
           type: 'attribute',
@@ -84,6 +89,7 @@ export default {
           column: 'station_id',
           linksTo: 'Station',
           property: 'station',
+          isDimension: true,
         },
         {
           type: 'attribute',
@@ -92,10 +98,12 @@ export default {
           column: 'pollutant_id',
           linksTo: 'Pollutant',
           property: 'pollutant',
+          isDimension: true,
         },
       ]
     },
     {
+      isObservation: false,
       type: 'table',
       source: 'stations.csv',
       uri: 'Station',
@@ -121,6 +129,7 @@ export default {
       ]
     },
     {
+      isObservation: false,
       type: 'table',
       source: 'pollutants.csv',
       uri: 'Pollutant',

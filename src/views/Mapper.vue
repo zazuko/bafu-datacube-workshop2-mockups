@@ -69,7 +69,7 @@
                     :key="attribute.uri"
                     class="column-mapped-attribute"
                     :style="{ 'background-color': attribute.table.color }"
-                    :label="attribute.table.label + ' -> ' + attribute.label"
+                    :label="getLabel(attribute.table) + ' -> ' + getLabel(attribute)"
                     type="is-light"
                     :delay="200"
                     size="is-small"

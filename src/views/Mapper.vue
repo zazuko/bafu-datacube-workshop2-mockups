@@ -10,7 +10,7 @@
           <div class="level">
             <div class="level-left">
               <div class="level-item">
-                <h2 class="title is-6">Input sources</h2>
+                <h2 class="title is-6">Input CSV files</h2>
                 <b-tooltip label="Adjust sources settings" type="is-light" :delay="200" size="is-small">
                   <b-button tag="router-link" :to="{ name: 'SourcesSettings' }" type="is-white" class="has-text-grey" size="is-small" icon-left="cog" />
                 </b-tooltip>
@@ -36,12 +36,12 @@
           <p class="has-text-centered"><b-icon icon="arrow-right" size="is-small" /></p>
         </div>
         <div class="column">
-          <h2 class="title is-6">Output resources</h2>
+          <h2 class="title is-6">Output tables</h2>
         </div>
       </div>
 
       <div class="mapping-sources">
-        <div class="source-mapping columns" v-for="source in cube.sources" :key="source.uri">
+        <div class="source-mapping columns" v-for="(source, sourceIndex) in cube.sources" :key="source.uri">
           <div class="column">
             <div class="source panel">
               <div class="panel-heading">
@@ -51,7 +51,7 @@
                   </div>
                   <div class="level-right">
                     <b-button :disabled="selectedColumns[source.uri].length === 0">
-                      Create resource from selected columns
+                      Create table from selected columns
                     </b-button>
                   </div>
                 </div>
@@ -85,11 +85,11 @@
                 <div class="level">
                   <div class="level-left">
                     <ResourceLabel :resource="table" :language="selectedLanguage" class="level-item" />
-                    <b-icon v-if="table.isObservation" icon="eye" size="is-small" class="level-item" title="Observation resource" />
+                    <b-icon v-if="table.isObservation" icon="eye" size="is-small" class="level-item" title="Observation table" />
                   </div>
                   <div class="level-right actions">
-                    <ButtonEdit title="Edit resource" @click="editTable(table)" />
-                    <ButtonDelete title="Delete resource" />
+                    <ButtonEdit title="Edit table" @click="editTable(table)" />
+                    <ButtonDelete title="Delete table" />
                   </div>
                 </div>
               </div>
@@ -112,9 +112,24 @@
                 <Button icon="plus" title="Add property" @click="addAttribute(table)" />
               </div>
             </div>
+            <div v-if="getSourceTables(source).length === 0 && sourceIndex === 0" class="content">
+              <p>
+                You haven't mapped any table yet.
+              </p>
+              <p>
+                Step 1 is probably to define which columns of your CSV will be dimensions of your cube:
+              </p>
+              <ol>
+                <li>Select columns that will be dimensions of your cube on the CSV file (left column)</li>
+                <li>Click "Create table from selected columns"</li>
+                <li>Select the type "Observation table" in the form. The Observation table represents the structure of your cube.</li>
+                <li>After submitting the form, you should already be able to see a first version of your cube in the "Cube Preview" (bottom of the screen).</li>
+              </ol>
+              <hr />
+            </div>
             <b-field>
               <b-button icon-left="plus">
-                Add resource
+                Create table from {{ source.label }}
               </b-button>
             </b-field>
           </div>

@@ -39,16 +39,16 @@
 </style>
 
 <script>
-import ResourceLabel from '@/components/ResourceLabel'
 import data from '@/data'
 
 export default {
   name: 'Cube',
-  components: { ResourceLabel },
-
   data () {
+    const cubeUri = this.$router.currentRoute.params.uri
+    const cube = data.cubes.find(({ uri }) => uri === cubeUri)
+
     return {
-      cube: data.cube,
+      cube,
       language: 'en',
       open: true,
     }

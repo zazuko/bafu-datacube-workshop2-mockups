@@ -37,7 +37,7 @@
                 <div class="dimension-filter">
                   <FiltersContinuous v-if="dimension.scaleOfMeasure === 'continuous'" :dimension="dimension" />
                   <FiltersTemporal v-else-if="dimension.scaleOfMeasure === 'temporal'" :dimension="dimension" />
-                  <FiltersNominal v-else-if="dimension.scaleOfMeasure === 'nominal'" :dimension="dimension" />
+                  <FiltersNominal v-else-if="dimension.scaleOfMeasure === 'nominal'" :dimension="dimension" :cube="cube" />
                   <p v-else>Cannot filter this type of dimension</p>
                 </div>
               </b-dropdown>

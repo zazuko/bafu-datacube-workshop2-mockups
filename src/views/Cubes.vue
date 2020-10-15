@@ -1,8 +1,10 @@
 <template>
   <section class="section">
-    <h2 class="title is-4">Cubes</h2>
+    <h2 class="title is-4">Cube projects</h2>
     <div class="panel">
       <router-link
+        v-for="cube in cubes"
+        :key="cube.uri"
         :to="{ name: 'Cube', params: { uri: cube.uri } }"
         class="panel-block"
       >
@@ -35,7 +37,7 @@ export default {
 
   data () {
     return {
-      cube: data.cube,
+      cubes: data.cubes,
       language: 'en',
     }
   }

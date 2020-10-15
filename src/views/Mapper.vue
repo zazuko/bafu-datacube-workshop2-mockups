@@ -41,7 +41,7 @@
       </div>
 
       <div class="mapping-sources">
-        <div class="source-mapping columns" v-for="source in sources" :key="source.uri">
+        <div class="source-mapping columns" v-for="source in cube.sources" :key="source.uri">
           <div class="column">
             <div class="source panel">
               <div class="panel-heading">
@@ -144,7 +144,7 @@
 
     <SidePane :isOpen="showSidePane" :title="sidePanelTitle" @close="onCloseSidePane">
       <MapperTableForm v-if="edited && edited.type === 'table'" :value="edited" />
-      <MapperAttributeForm v-else-if="edited && edited.type === 'attribute'" :value="edited" />
+      <MapperAttributeForm v-else-if="edited && edited.type === 'attribute'" :value="edited" :cube="cube" />
       <p v-else>Unsupported type</p>
     </SidePane>
   </div>
@@ -238,7 +238,6 @@ import SidePane from '@/components/SidePane.vue'
 import MapperTableForm from '@/components/MapperTableForm.vue'
 import MapperAttributeForm from '@/components/MapperAttributeForm.vue'
 import ResourceLabel from '@/components/ResourceLabel.vue'
-import data from '@/data'
 
 export default {
   name: 'Mapper',
@@ -254,14 +253,14 @@ export default {
   },
 
   data () {
+    const cube = this.$parent.cube
+
     return {
-      sources: data.sources,
-      tables: data.tables,
-      cube: data.cube,
+      cube,
 
       selectedLanguage: 'en',
       columnFilter: 'all',
-      selectedColumns: Object.fromEntries(data.sources.map(({ uri }) => [uri, []])),
+      selectedColumns: Object.fromEntries(cube.sources.map(({ uri }) => [uri, []])),
       showPreview: false,
       edited: null,
     }
@@ -273,11 +272,11 @@ export default {
     },
 
     getSourceTables (source) {
-      return this.tables.filter((table) => table.source === source.uri)
+      return this.cube.tables.filter((table) => table.source === source.uri)
     },
 
     getMappedAttributes (source, column) {
-      return this.tables.reduce((acc, table) => {
+      return this.cube.tables.reduce((acc, table) => {
         return acc.concat(table.attributes
           .map((attribute) => ({ ...attribute, table }))
           .filter((attribute) => {
@@ -287,7 +286,7 @@ export default {
     },
 
     getTable (uri) {
-      return this.tables.find((table) => table.uri === uri)
+      return this.cube.tables.find((table) => table.uri === uri)
     },
 
     onCloseSidePane () {

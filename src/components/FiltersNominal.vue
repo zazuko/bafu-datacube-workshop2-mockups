@@ -21,14 +21,12 @@
 </style>
 
 <script>
-import data from '@/data'
-
 export default {
   name: 'FiltersNominal',
-  props: ['dimension'],
+  props: ['dimension', 'cube'],
 
   data () {
-    const allResources = data.cube.data
+    const allResources = this.cube.data
       .map((row) => row[this.dimension.uri].value)
 
     const resources = [...new Set(allResources)]

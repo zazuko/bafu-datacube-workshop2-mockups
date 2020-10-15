@@ -6,7 +6,6 @@
 
 <script>
 import CubeDesigner from '@/components/CubeDesigner.vue'
-import data from '@/data'
 
 export default {
   name: 'Designer',
@@ -15,7 +14,8 @@ export default {
   },
 
   data () {
-    return { cube: data.cube }
+    const cube = this.$parent.cube
+    return { cube }
   }
 }
 </script>

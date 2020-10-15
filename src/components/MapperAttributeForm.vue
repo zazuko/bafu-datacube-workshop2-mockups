@@ -60,15 +60,15 @@ import data from '@/data'
 export default {
   name: 'MapperTableForm',
   components: { InputMultiValue, InputLanguage, ResourceLabel },
-  props: ['value'],
+  props: ['value', 'cube'],
 
   data () {
-    const table = data.tables.find((table) => table.attributes.includes(this.value))
-    const source = data.sources.find((source) => source.uri === table.source)
+    const table = this.cube.tables.find((table) => table.attributes.includes(this.value))
+    const source = this.cube.sources.find((source) => source.uri === table.source)
 
     return {
       source,
-      tables: data.tables,
+      tables: this.cube.tables,
       datatypes: data.datatypes,
     }
   },
